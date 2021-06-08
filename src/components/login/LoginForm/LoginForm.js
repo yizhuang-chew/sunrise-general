@@ -16,8 +16,8 @@ export default {
   mixins: [authMixin],
   data: () => ({
     form: {
-      email: 'willy.wonka@commercetools.com',
-      password: 'p@ssword',
+      email: '',
+      password: '',
     },
   }),
   methods: {

@@ -23,7 +23,7 @@ export default {
   },
   setup(props) {
     const shoppingList = ref(null)
-    const shareEmail = ref("willy.wonka@commercetools.com")
+    const shareEmail = ref("")
     const {
       getShoppingList, 
       removeLineItem,
