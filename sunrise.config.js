@@ -9,23 +9,20 @@ export default {
   ct: {
     auth: {
       host:
-        process.env.VUE_APP_CT_AUTH_HOST ||
         "https://auth.europe-west1.gcp.commercetools.com",
       projectKey:
-        process.env.VUE_APP_CT_PROJECT_KEY || "sunrise-spa",
+        "sunrise-spa",
       credentials: {
         clientId:
-          process.env.VUE_APP_CT_CLIENT_ID ||
-          "jFVHj0-tO-THQt9evnGTJ2fD",
+          "eKL9F2mSs4Ua1vfx5IbBAoBf",
         clientSecret:
-          process.env.VUE_APP_CT_CLIENT_SECRET ||
-          "eUQgmtanysDpYxlOePOhcFklrwa5X8Sj",
+          "szErb72qV6CzR61_Zf-30wqacONCZNNZ",
       },
       scopes: [
-        process.env.VUE_APP_CT_SCOPE ||
-          "manage_my_profile:sunrise-spa create_anonymous_token:sunrise-spa" +
-            " manage_my_payments:sunrise-spa view_products:sunrise-spa manage_my_orders:sunrise-spa" +
-            " manage_my_shopping_lists:sunrise-spa",
+          "manage_my_orders:sunrise-spa manage_my_profile:sunrise-spa "+
+          "manage_my_payments:sunrise-spa view_published_products:sunrise-"+
+          "spa view_categories:sunrise-spa manage_my_shopping_lists:sunrise-"+
+          "spa manage_shopping_lists:sunrise-spa create_anonymous_token:sunrise-spa",
       ],
     },
     api:
