@@ -5,6 +5,7 @@
     checkout: "Zur Kasse"
     emptyList: "Ihr Einkaufsliste ist derzeit leer"
     addToCart: "?????"
+    share: "??????"
   en:
     shoppingList: "Shopping List"
     quantity: "Quantity"
@@ -12,3 +13,4 @@
     checkout: "Checkout"
     emptyList: "Your shopping list is currently empty"
     addToCart: "Add all items to cart"
+    share: "Share shopping list"

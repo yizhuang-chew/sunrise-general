@@ -69,5 +69,39 @@
         </div>
       </div>
     </div>
+
+
+
+
+
+        <div class="cart-main-area pt-50 pb-100" v-if="sharedNotEmpty">
+      <div class="container-fluid pl-50 pr-50">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <table>
+              <thead>
+                <tr>
+                  <th>{{ $t('name') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr 
+                  v-for="item in sharedLists"
+                  :key="item.id"
+                >
+                  <td>
+                    <router-link
+                      :to="{ name: 'single list', params: { listName: item.name.en } }"
+                    >
+                      {{item.name.en}}
+                    </router-link>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

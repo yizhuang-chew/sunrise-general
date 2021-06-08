@@ -27,6 +27,13 @@ export default (props,ctx,cart) => {
       return response.results[0]
     });
   };
+  const getSharedLists = (email) => {
+    const current = {};
+    requested.current = current;
+    return shoppingListApi.get({email}).then((response) => {
+      return response.results
+    });
+  };
   const refreshList = ()=>{
     shoppingListApi.resetCache()
     return getShoppingList()
@@ -94,6 +101,8 @@ export default (props,ctx,cart) => {
     )
 
   }
+  const shareList = (email,shoppingList) => 
+    shoppingListApi.shareList(email,shoppingList).finally(refreshList)
   onMounted(getShoppingList);
   watch(auth,()=>{
     shoppingListApi.resetCache();
@@ -107,6 +116,8 @@ export default (props,ctx,cart) => {
     changeQuantity,
     addShoppingListToCart,
     addLineItemToCart,
+    shareList,
+    getSharedLists,
     removeList
   };
 };

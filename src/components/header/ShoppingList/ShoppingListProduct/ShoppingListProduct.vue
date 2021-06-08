@@ -25,7 +25,12 @@
           {{ product.name }}
         </router-link>
       </h4>
-      <input type="number" :value="quantity" @keyup="amountChange" />
+      <input 
+        type="number" 
+        :value="quantity" 
+        @keyup="amountChange" 
+        :disabled="!edit"
+      />
     </div>
   </div>
 </template>

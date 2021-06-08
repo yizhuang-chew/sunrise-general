@@ -11,6 +11,11 @@ export default {
       type: String,
       required: true,
     },
+    edit: {
+      type: Boolean,
+      required: false,
+      default:true
+    },
   },
   components: {
     VuePerfectScrollbar,
@@ -18,11 +23,13 @@ export default {
   },
   setup(props) {
     const shoppingList = ref(null)
+    const shareEmail = ref("willy.wonka@commercetools.com")
     const {
       getShoppingList, 
       removeLineItem,
       changeQuantity,
       addShoppingListToCart,
+      shareList,
       addLineItemToCart:addLineToCart
     } = inject(SHOPPING_LIST);
     getShoppingList({name:props.shoppingListName}).then(
@@ -55,6 +62,13 @@ export default {
     const amountChange = (quantity,sku,lineItemId)=>{
       changeQuantity(sku,quantity,shoppingList.value.name.en,lineItemId)
     }
+    const share = ()=>{
+      return shareList(shareEmail.value,shoppingList.value).then(
+        result=>{
+          shoppingList.value=result
+        }
+      )
+    }
     const lineItems = computed(() => {
       return items.value.map(
         item=>({
@@ -63,6 +77,9 @@ export default {
         })
       )
     });
+    const changeShareEmail = e=>{
+      shareEmail.value=e.target.value
+    }
     return {
       listNotEmpty,
       lineItems,
@@ -71,6 +88,9 @@ export default {
       amountChange,
       shoppingList,
       addItemToCart,
+      share,
+      shareEmail,
+      changeShareEmail,
       addShoppingListToCart
     };
   },

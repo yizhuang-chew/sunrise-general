@@ -7,7 +7,7 @@
       <div class="sidebar-cart-all">
         <div class="cart-content">
           <h3>{{ $t('shoppingList') }} </h3>
-          <span v-if="listNotEmpty">
+          <div v-if="listNotEmpty">
             <ul>
               <li
                 v-for="lineItem in lineItems"
@@ -21,8 +21,9 @@
                   :quantity="lineItem.quantity"
                   :lineItemId="lineItem.id"
                   @amountChange="amountChange"
+                  :edit="edit"
                 />
-                <div class="cart-delete">
+                <div class="cart-delete" v-if="edit">
                   <a
                     href="javascript:;"
                     @click="()=>removeItem(lineItem.id)"
@@ -30,22 +31,38 @@
                   >
                     <i class="fa fa-trash-o"></i>
                   </a>
-                  <a
-                    href="javascript:;"
-                    @click="()=>addItemToCart(lineItem)"
-                  >
-                    Add item to cart
-                  </a>
                 </div>
+                <a
+                  href="javascript:;"
+                  @click="()=>addItemToCart(lineItem)"
+                >
+                  Add item to cart
+                </a>
               </li>
             </ul>
-            <a
-              @click="()=>addShoppingListToCart(shoppingList.id)"
-              class="btn-grey"
-            >
-              {{ $t('addToCart') }}
-            </a>
-          </span>
+            <div>
+              <a
+                @click="()=>addShoppingListToCart(shoppingList.id)"
+                class="btn-grey"
+              >
+                {{ $t('addToCart') }}
+              </a>
+            </div>
+            <div v-if="edit">
+              <input 
+                type="email" 
+                placeholder="Email of the user to share"
+                :value="shareEmail"
+                @keyup="changeShareEmail"
+              />
+              <a
+                @click="()=>share()"
+                class="btn-grey"
+              >
+                {{ $t('share') }}
+              </a>
+            </div>
+          </div>
           <span v-if="!listNotEmpty">
             <h5>{{ $t('emptyList') }}</h5>
           </span>

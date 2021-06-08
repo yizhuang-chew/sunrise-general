@@ -13,6 +13,7 @@ const SET_CURRENCY = "SET_CURRENCY";
 const SET_CHANNEL = "SET_CHANNEL";
 const SET_STORE_NAME = "SET_STORE_NAME";
 const SET_AUTHENTICATED = "SET_AUTHENTICATED";
+const SET_CURRENT_USER = "SET_CURRENT_USER";
 const SET_TOKEN_INFO = "SET_TOKEN_INFO";
 const SET_MINI_CART_OPEN = "SET_MINI_CART_OPEN";
 const SET_CART_ITEMS = "SET_CART_ITEMS";
@@ -74,6 +75,7 @@ export default new Vuex.Store({
     miniCartOpen: false,
     miniCartCloseTimer: 0,
     cartItems: 0,
+    currentUser:null
   },
 
   actions: {
@@ -105,6 +107,8 @@ export default new Vuex.Store({
 
     setAuthenticated: ({ commit }, authenticated) =>
       commit(SET_AUTHENTICATED, authenticated),
+    setCurrentUser: ({ commit }, email) =>
+      commit(SET_CURRENT_USER, email),
 
     setTokenInfo: ({ commit }, tokenInfo) =>
       commit(SET_TOKEN_INFO, tokenInfo),
@@ -171,6 +175,12 @@ export default new Vuex.Store({
     [SET_AUTHENTICATED](state, authenticated) {
       state.authenticated = authenticated;
       state.tokenInfo = null;
+      if(!authenticated){
+        state.currentUser = null;
+      }
+    },
+    [SET_CURRENT_USER](state,email) {
+      state.currentUser=email;
     },
 
     [SET_TOKEN_INFO](state, tokenInfo) {

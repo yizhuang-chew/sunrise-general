@@ -18,6 +18,11 @@ export default {
       type: Number,
       required: true,
     },
+    edit: {
+      type: Boolean,
+      required: false,
+      default:true
+    },
   },
   setup(props,ctx) {
     const {product} = useProductQuery(

@@ -16,8 +16,8 @@ export default {
   mixins: [authMixin],
   data: () => ({
     form: {
-      email: '',
-      password: '',
+      email: 'willy.wonka@commercetools.com',
+      password: 'p@ssword',
     },
   }),
   methods: {
@@ -38,6 +38,7 @@ export default {
           },
         },
       }).then(() => this.login(this.form.email, this.form.password))
+        .then(()=> this.$store.dispatch('setCurrentUser', this.form.email))
         .then(() => this.$router.push({ name: 'user' }));
     },
     getErrorMessage({ code }) {
