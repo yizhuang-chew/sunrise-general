@@ -26,7 +26,6 @@ export default {
       ()=>(sharedLists.value?.length||0)>0
     )
     onMounted(()=>{
-      //@todo: if page opens on this route then no current user is set
       if(!currentUser.value){
         return
       }

@@ -59,6 +59,7 @@ export default new Vuex.Store({
         "authenticated",
         "customerGroup",
         "channel",
+        "currentUser",
         "storeName",
       ],
     }),
