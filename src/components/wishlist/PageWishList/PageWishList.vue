@@ -1,6 +1,6 @@
-<style src="./PageShoppingList.scss" lang="scss"></style>
-<i18n src="./PageShoppingList.txt"></i18n>
-<script src="./PageShoppingList.js"></script>
+<style src="./PageWishList.scss" lang="scss"></style>
+<i18n src="./PageWishList.txt"></i18n>
+<script src="./PageWishList.js"></script>
 
 <template>
   <div>
@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="breadcrumb-content text-center">
           <div class="breadcrumb-title">
-            <h2>{{ $t('yourList') }}</h2>
+            <h2>{{ $t("wishList") }}</h2>
           </div>
           <ul>
             <li>
@@ -19,7 +19,18 @@
       </div>
     </div>
     <LoadingSpinner v-if="isLoading" />
-    <div class="cart-main-area pt-50 pb-100" v-else-if="shoppingListNotEmpty">
+    <div
+      class="wishlist-main-area pt-30 pb-100"
+      v-else-if="shoppingListNotEmpty"
+    >
+      <div class="container" v-for="item in shoppingLists" :key="item.id">
+        <h3 class="pt-20 pb-20">{{ item.name.en }}</h3>
+        <div class="row">
+          <WishListItems :shoppingListName="item.name.en" />
+        </div>
+      </div>
+    </div>
+    <!-- <div class="cart-main-area pt-50 pb-100" v-else-if="shoppingListNotEmpty">
       <div class="container-fluid pl-50 pr-50">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -56,16 +67,16 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div
       v-if="!shoppingListNotEmpty"
       class="empty-area mt-50 border-top-2 pt-120 pb-120"
     >
       <div class="container">
         <div class="empty-content text-center" data-test="empty-cart">
-          <h2>{{ $t('yourList') }}</h2>
-          <p>{{ $t('empty') }}</p>
-          <router-link to="/">{{ $t('continueShopping') }}</router-link>
+          <h2>{{ $t("yourList") }}</h2>
+          <p>{{ $t("empty") }}</p>
+          <router-link to="/">{{ $t("continueShopping") }}</router-link>
         </div>
       </div>
     </div>

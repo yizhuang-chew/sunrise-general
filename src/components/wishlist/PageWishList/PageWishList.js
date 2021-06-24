@@ -1,29 +1,29 @@
 import { computed, inject } from '@vue/composition-api';
 import { SHOPPING_LIST } from '../../../composition/useShoppingList';
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner.vue';
+import WishListItems from '../WishListItems/WishListItems.vue';
 
 export default {
   components: {
     LoadingSpinner,
+    WishListItems,
   },
   setup() {
-    const {shoppingLists,removeList} = inject(SHOPPING_LIST);
-    const isLoading = computed(
-      ()=>!(shoppingLists.value)
-    )
+    const { shoppingLists, removeList } = inject(SHOPPING_LIST);
+    const isLoading = computed(() => !shoppingLists.value);
     const shoppingListNotEmpty = computed(
-      ()=>(shoppingLists.value?.length||0)>0
-    )
+      () => (shoppingLists.value?.length || 0) > 0
+    );
     return {
       shoppingLists,
       isLoading,
       shoppingListNotEmpty,
-      removeList
-    }
+      removeList,
+    };
   },
   methods: {
     deleteList(list) {
-      this.removeList(list)
-    }
-  }
+      this.removeList(list);
+    },
+  },
 };

@@ -9,8 +9,8 @@ import ResetPassword from '../components/login/ResetPassword/ResetPassword.vue';
 import PageUserAccount from '../components/useraccount/PageUserAccount/PageUserAccount.vue';
 import PageNotFound from '../components/common/PageNotFound/PageNotFound.vue';
 import PageProductDetail from '../components/productdetail/PageProductDetail/PageProductDetail.vue';
-import PageShoppingList from '../components/cartdetail/PageShoppingList/PageShoppingList.vue';
-import ListDetail from '../components/cartdetail/PageShoppingList/ListDetail/ListDetail.vue';
+import PageWishList from '../components/wishlist/PageWishList/PageWishList.vue';
+import ListDetail from '../components/wishlist/PageWishList/ListDetail/ListDetail.vue';
 import PageCartDetail from '../components/cartdetail/PageCartDetail/PageCartDetail.vue';
 import PageStoreLocator from '../components/stores/PageStoreLocator/PageStoreLocator.vue';
 import TabAccountDetails from '../components/useraccount/TabAccountDetails/TabAccountDetails.vue';
@@ -28,12 +28,10 @@ const requiresCart = true;
 
 export default [
   {
-    path: `/:country(${
-      Object.keys(config.countries).join('|')
-    })?/:locale(${
-      Object.keys(config.languages).join('|')
-    })?`,
-    props:true,
+    path: `/:country(${Object.keys(config.countries).join(
+      '|'
+    )})?/:locale(${Object.keys(config.languages).join('|')})?`,
+    props: true,
     component: Root,
     children: [
       {
@@ -108,13 +106,20 @@ export default [
         },
         children: [
           {
-            path: 'dashboard', alias: '', name: 'user', component: TabDashboard,
+            path: 'dashboard',
+            alias: '',
+            name: 'user',
+            component: TabDashboard,
           },
           {
-            path: 'order/:id', name: 'order', component: TabOrderDetail,
+            path: 'order/:id',
+            name: 'order',
+            component: TabOrderDetail,
           },
           {
-            path: 'return/:id', name: 'return', component: TabReturn,
+            path: 'return/:id',
+            name: 'return',
+            component: TabReturn,
           },
           {
             path: 'orders/:page?',
@@ -122,10 +127,14 @@ export default [
             component: TabOrderList,
           },
           {
-            path: 'account', name: 'account', component: TabAccountDetails,
+            path: 'account',
+            name: 'account',
+            component: TabAccountDetails,
           },
           {
-            path: 'changepassword', name: 'changepassword', component: TabChangePassword,
+            path: 'changepassword',
+            name: 'changepassword',
+            component: TabChangePassword,
           },
         ],
       },
@@ -175,7 +184,7 @@ export default [
         path: 'shopping-list',
         name: 'shopping list',
         components: {
-          default: PageShoppingList,
+          default: PageWishList,
           header: TheHeader,
           footer: TheFooter,
         },

@@ -24,13 +24,13 @@ export default {
       required: false,
     },
     onAdd: {
-      type: Function|Boolean,
-      required:false
+      type: Function | Boolean,
+      required: false,
     },
     addCaption: {
-      type:String,
-      default:"addToCart"
-    }
+      type: String,
+      default: 'addToCart',
+    },
   },
   mixins: [cartMixin],
   data: () => ({
@@ -46,10 +46,13 @@ export default {
     },
   },
   methods: {
+    openAddToShoppingList() {
+      this.$emit('open-add-shopping-list');
+    },
     async addLineItem() {
-      if(this.onAdd){
-        this.onAdd(this.sku,this.quantity)
-        return
+      if (this.onAdd) {
+        this.onAdd(this.sku, this.quantity);
+        return;
       }
       if (!this.isOnStock) {
         return;
@@ -59,7 +62,10 @@ export default {
       }
       //only if hasStockInfo is true, that means stock info is available
       //  if stock info is not available then ignore stock errors
-      if (this.quantity <= this.availableQuantity || this.hasStockInfo === false) {
+      if (
+        this.quantity <= this.availableQuantity ||
+        this.hasStockInfo === false
+      ) {
         this.showQuantityError = false;
         return addLine(this)
           .then(() => this.$emit('product-added'))

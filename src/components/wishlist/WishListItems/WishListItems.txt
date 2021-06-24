@@ -1,14 +1,14 @@
   de:
-    shoppingList: "Einkaufsliste"
+    shoppingList: "Wunschliste"
     quantity: "Menge"
     delete: "Löschen"
     checkout: "Zur Kasse"
-    emptyList: "Ihr Einkaufsliste ist derzeit leer"
+    emptyList: "Ihr Wunschliste ist derzeit leer"
     addToCart: "?????"
   en:
-    shoppingList: "Shopping List"
+    shoppingList: "Wish List"
     quantity: "Quantity"
     delete: "Delete"
     checkout: "Checkout"
-    emptyList: "Your shopping list is currently empty"
+    emptyList: "Your wish list is currently empty"
     addToCart: "Add all items to cart"

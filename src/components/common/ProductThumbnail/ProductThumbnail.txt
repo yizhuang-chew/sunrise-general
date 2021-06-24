@@ -3,12 +3,12 @@ en:
   new: New
   quickView: Quick view
   moreColors: More colours
-  add: Add item to wishlist
-  addToCart: Add to Bag
+  wishlist: Add to wishlist
+  addToCart: Add to cart
 de:
   sale: Sale
   new: Neu
   quickView: Schnellansicht
   moreColors: Mehr Farben
-  add: Auf den Wunschzettel
+  wishlist: Auf den Wunschzettel
   addToCart: Zum Warenkorb Hinzufügen

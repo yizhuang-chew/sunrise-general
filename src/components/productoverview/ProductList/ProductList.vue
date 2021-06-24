@@ -45,7 +45,7 @@
       <div v-else>
         <div class="empty-results-container">
           <span class="empty-results" data-test="empty-results">
-            {{ $t('notFound') }}
+            {{ $t("notFound") }}
           </span>
         </div>
       </div>
@@ -53,7 +53,7 @@
     <div v-else>
       <div class="empty-results-container">
         <span class="empty-results" data-test="category-not-found">
-          {{ $t('categoryNotFound') }}
+          {{ $t("categoryNotFound") }}
         </span>
       </div>
     </div>

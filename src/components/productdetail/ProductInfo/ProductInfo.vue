@@ -28,10 +28,11 @@
           :sku="sku"
           :isOnStock="isOnStock"
           :availableQuantity="availableQuantity"
+          @open-add-shopping-list="openAddToShoppingList"
         />
-        <a href @click.prevent="openAddToShoppingList">
+        <!-- <a href @click.prevent="openAddToShoppingList">
           <i class="dl-icon-heart"></i><span>Shopping list</span>
-        </a>
+        </a> -->
 
         <DetailsSection :sku="sku" />
       </div>

@@ -14,15 +14,18 @@ export default {
       required: true,
     },
   },
-  setup(props,ctx){
+  setup(props, ctx) {
     const sku = ref(props.sku);
-    watch(props,newProps=>sku.value=newProps.sku)
-    return useProductQuery(props,ctx,sku);
+    watch(props, (newProps) => (sku.value = newProps.sku));
+    return useProductQuery(props, ctx, sku);
   },
   methods: {
     openAddToShoppingList() {
-      this.$emit('open-add-shopping-list', { slug: this.currentProduct.slug, sku: this.currentProduct.sku });
-    }
+      this.$emit('open-add-shopping-list', {
+        slug: this.currentProduct.slug,
+        sku: this.currentProduct.sku,
+      });
+    },
   },
   components: {
     DetailsSection,

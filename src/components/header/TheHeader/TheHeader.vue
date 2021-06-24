@@ -6,7 +6,7 @@
   <header class="header-area">
     <div class="main-header-wrap bg-gray">
       <div class="custom-container">
-        <div class="header-top pt-10 pb-10">
+        <div class="header-top p-3">
           <div class="row align-items-center">
             <div class="col-sm-6">
               <div class="header-info header-info-inc">
@@ -15,9 +15,9 @@
                   data-test="stores-link"
                   v-if="showLocationChange"
                 >
-                  {{ $t('stores') }}
+                  {{ $t("stores") }}
                 </router-link>
-                <a href="#">{{$t('help')}}</a>
+                <a href="#">{{ $t("help") }}</a>
               </div>
             </div>
             <div class="col-sm-6 d-flex justify-content-end">
@@ -76,6 +76,14 @@
                     </div>
                     <LoginButton />
                     <div class="cart-wrap component-same ml-10">
+                      <router-link :to="{ name: 'shopping list' }">
+                        <i class="dl-icon-heart"></i>
+                        <span v-if="totalShoppingCartItems" class="count-style"
+                          >{{ totalShoppingCartItems }}
+                        </span>
+                      </router-link>
+                    </div>
+                    <div class="cart-wrap component-same ml-10">
                       <a
                         href
                         @click.prevent="openMiniCart"
@@ -85,14 +93,6 @@
                         <i class="dl-icon-cart1"></i>
                         <span class="count-style">{{ totalCartItems }} </span>
                       </a>
-                    </div>
-                    <div class="cart-wrap component-same ml-10">
-                      <router-link
-                        :to="{ name: 'shopping list' }"
-                      >
-                        <i class="dl-icon-heart"></i>
-                        <span class="count-style">{{ totalShoppingCartItems }} </span>
-                      </router-link>
                     </div>
                   </div>
                 </div>
@@ -116,14 +116,14 @@
             <div class="mobile-header-right-wrap">
               <div class="same-style cart-wrap">
                 <a href="#" class="cart-active">
-                  <i class="dl-icon-cart1 "></i>
-                  <span class="count-style">{{totalCartItems}}</span>
+                  <i class="dl-icon-cart1"></i>
+                  <span class="count-style">{{ totalCartItems }}</span>
                 </a>
               </div>
               <div class="same-style cart-wrap">
                 <a href="#" class="cart-active">
-                  <i class="dl-icon-heart "></i>
-                  <span class="count-style">{{totalShoppingCartItems}}</span>
+                  <i class="dl-icon-heart"></i>
+                  <span class="count-style">{{ totalShoppingCartItems }}</span>
                 </a>
               </div>
               <div class="mobile-off-canvas">

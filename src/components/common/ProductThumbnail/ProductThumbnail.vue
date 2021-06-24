@@ -3,7 +3,7 @@
 <script src="./ProductThumbnail.js"></script>
 
 <template>
-  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+  <div class="col-xl-3 col-lg-5 col-md-6 col-sm-6 product-container">
     <div class="product-wrap mb-50">
       <div class="product-img mb-25">
         <router-link
@@ -23,7 +23,7 @@
         </router-link>
         <div class="product-action">
           <a href @click.prevent="openAddToShoppingList"
-            ><i class="dl-icon-heart"></i> <span>Shopping list</span></a
+            ><i class="dl-icon-heart4"></i> <span>{{ $t("wishlist") }}</span></a
           >
           <a href @click.prevent="openQuickView"
             ><i class="dl-icon-view"></i> <span>Quick Shop</span></a
@@ -34,8 +34,8 @@
             href="#"
             @click.prevent="addLineItem()"
           >
-            <i class=" dl-icon-cart29"></i>
-            <span>{{ $t('addToCart') }}</span></a
+            <i class="dl-icon-cart29"></i>
+            <span>{{ $t("addToCart") }}</span></a
           >
         </div>
       </div>
