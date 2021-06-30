@@ -1,8 +1,12 @@
 import useProductQuery from '../../../../composition/useProductQuery';
-import { inject, ref } from '@vue/composition-api';
+import BasePrice from '../../../common/BasePrice/BasePrice.vue';
+import { inject } from '@vue/composition-api';
 import { SHOPPING_LIST } from '../../../../composition/useShoppingList';
 
 export default {
+  components: {
+    BasePrice,
+  },
   props: {
     id: {
       type: String,
@@ -22,7 +26,6 @@ export default {
     },
   },
   setup(props, ctx) {
-    const shoppingList = ref(null);
     const { product } = useProductQuery(
       props,
       ctx,
@@ -30,25 +33,12 @@ export default {
       props.id,
       props.variantId
     );
-    const {
-      removeLineItem,
-      // changeQuantity,
-      addLineItemToCart: addLineToCart,
-    } = inject(SHOPPING_LIST);
-    const removeItem = (itemId) => {
-      removeLineItem(
-        itemId,
-        shoppingList.value.id,
-        shoppingList.value.version
-      ).then((response) => (shoppingList.value = response));
-    };
+    const { addLineItemToCart: addLineToCart } = inject(SHOPPING_LIST);
     const addItemToCart = (lineItem) => {
       addLineToCart(lineItem.productId, lineItem.quantity, lineItem.variantId);
     };
     return {
       product,
-      removeLineItem,
-      removeItem,
       addItemToCart,
     };
   },
@@ -59,16 +49,27 @@ export default {
       }
       return null;
     },
-    amountChange(e) {
-      const newAmount = Number(e.target.value);
-      if (!isNaN(newAmount) && newAmount > 0) {
+    increment() {
+      this.$emit(
+        'amount-change',
+        this.quantity + 1,
+        this.product.sku,
+        this.lineItemId
+      );
+    },
+
+    decrement() {
+      if (this.quantity > 0) {
         this.$emit(
-          'amountChange',
-          newAmount,
+          'amount-change',
+          this.quantity - 1,
           this.product.sku,
           this.lineItemId
         );
-      }
+      } else this.removeItem();
+    },
+    removeItem() {
+      this.$emit('remove-product', this.lineItemId);
     },
     productRoute(productSlug, sku) {
       return {

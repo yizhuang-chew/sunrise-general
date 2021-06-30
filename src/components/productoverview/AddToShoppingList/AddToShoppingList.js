@@ -1,6 +1,6 @@
-import { inject, provide, ref } from "@vue/composition-api";
-import  { SHOPPING_LIST } from '../../../composition/useShoppingList';
-import ProductQuickView from '../ProductQuickView/ProductQuickView.vue'
+import { inject, provide, ref } from '@vue/composition-api';
+import { SHOPPING_LIST } from '../../../composition/useShoppingList';
+import ProductQuickView from '../ProductQuickView/ProductQuickView.vue';
 export default {
   data: () => ({
     quantity: 1,
@@ -12,23 +12,23 @@ export default {
     showModal: Boolean,
     productSku: String,
   },
-  setup(props,ctx){
-    const name = ref('My Shopping List')
+  setup(props, ctx) {
+    const name = ref('My Wish List');
     // eslint-disable-next-line no-unused-vars
-    const {addToShoppingList} = inject(SHOPPING_LIST);
-    const onAdd = (sku,quantity)=>{
-      addToShoppingList(sku,quantity,name.value)
+    const { addToShoppingList } = inject(SHOPPING_LIST);
+    const onAdd = (sku, quantity) => {
+      addToShoppingList(sku, quantity, name.value);
       ctx.emit('close-modal');
-    }
-    provide('ADD_TO_SHOPPING_LIST',{
+    };
+    provide('ADD_TO_SHOPPING_LIST', {
       onAdd,
       name,
-      addCaption:"addToShoppingList"
+      addCaption: 'addToShoppingList',
     });
   },
   methods: {
     closeModal() {
       this.$emit('close-modal');
-    }
+    },
   },
 };
