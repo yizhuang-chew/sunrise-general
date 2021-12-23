@@ -22,7 +22,7 @@
             <div class="footer-widget footer-about-2 mb-30">
               <div class="footer-logo">
                 <a href="index.html"
-                  ><img src="../../../assets/img/logo.svg" alt="logo"
+                  ><img src="../../../assets/img/logo.png" alt="logo"
                 /></a>
               </div>
               <div class="footer-info">

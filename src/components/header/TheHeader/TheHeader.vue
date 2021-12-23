@@ -49,7 +49,7 @@
                   <div class="logo">
                     <router-link to="/">
                       <img
-                        src="../../../assets/img/logo.svg"
+                        src="../../../assets/img/logo.png"
                         alt="SUNRISE"
                         class="img-responsive sunrise-logo"
                       />
@@ -108,7 +108,7 @@
           <div class="col-6">
             <div class="mobile-logo logo-width">
               <a href="index.html">
-                <img alt="" src="assets/images/logo/logo.svg" />
+                <img alt="" src="assets/images/logo/logo.png" />
               </a>
             </div>
           </div>
