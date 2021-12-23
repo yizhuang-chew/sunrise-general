@@ -17,7 +17,13 @@ export default {
       return "/assets/img/missing.svg";
     },
 
-    productRoute(productSlug, sku) {
+    productRoute(productSlug, sku, productType) {
+      if(productType=="RentalDevice"){
+        return {
+          name: 'rentalproduct',
+          params: { productSlug, sku },
+        };
+      }
       return {
         name: 'product',
         params: { productSlug, sku },

@@ -9,6 +9,7 @@ import ResetPassword from '../components/login/ResetPassword/ResetPassword.vue';
 import PageUserAccount from '../components/useraccount/PageUserAccount/PageUserAccount.vue';
 import PageNotFound from '../components/common/PageNotFound/PageNotFound.vue';
 import PageProductDetail from '../components/productdetail/PageProductDetail/PageProductDetail.vue';
+import PageRentalProductDetail from '../components/rentalproductdetail/PageProductDetail/PageProductDetail.vue';
 import PageShoppingList from '../components/cartdetail/PageShoppingList/PageShoppingList.vue';
 import ListDetail from '../components/cartdetail/PageShoppingList/ListDetail/ListDetail.vue';
 import PageCartDetail from '../components/cartdetail/PageCartDetail/PageCartDetail.vue';
@@ -134,6 +135,20 @@ export default [
         name: 'product',
         components: {
           default: PageProductDetail,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+        props: {
+          default: true,
+          header: false,
+          footer: false,
+        },
+      },
+      {
+        path: 'rentalproduct/:productSlug/:sku',
+        name: 'rentalproduct',
+        components: {
+          default: PageRentalProductDetail,
           header: TheHeader,
           footer: TheFooter,
         },

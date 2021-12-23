@@ -43,6 +43,7 @@ export default (props,ctx,sku=ref(null),id,variantId) => {
       'filter.query': `variants.sku:"${sku.value}"`,
       priceCountry: country.value,
       priceChannel: channel.value?.id,
+      expand: ['productType', 'masterVariant.prices[*].channel', 'variants[*].prices[*].channel'],
     };
     if(staged.value){
       query.staged=true
@@ -68,8 +69,9 @@ export default (props,ctx,sku=ref(null),id,variantId) => {
         const p = id ? response : response.results[0]
         const name = p?.name[locale.value]
         const slug = p?.slug[locale.value]
+        const productType=p?.productType?.obj.key;
         const allVariants = p.variants.concat(p.masterVariant).map(
-          p=>({...p,name,slug})
+          p=>({...p,productType,name,slug})
         )
         variants.value = allVariants;
         product.value = allVariants.find(v=>sku.value

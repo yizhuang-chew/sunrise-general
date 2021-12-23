@@ -191,6 +191,57 @@ export const addLine = async (component) => {
   })
 
 }
+export const addRental = async (component) => {
+
+  let customType = {
+  }
+
+  if (component.selectedChannelName && component.selectedChannelName != '') {
+    customType={
+      custom: {
+        typeKey: 'RentalPlan',
+        fields: []
+      }
+    };
+    customType.custom.fields.push(
+      {
+        name: 'PlanType',
+        value: `"${component.selectedChannelName}"`,
+      }
+    )
+  }
+
+  if (!component.cartExists) {
+    await component.createMyCart({
+      currency: component.$store.state.currency,
+      country: component.$store.state.country,
+      shippingAddress: { country: component.$store.state.country },
+    });
+  }
+  const distributionChannel = component.selectedChannel ? {
+    distributionChannel: {
+      typeId: 'channel',
+      id: component.selectedChannel,
+    },
+  } : {};
+  const supplyChannel = component.$store.state.channel ? {
+    supplyChannel: {
+      typeId: 'channel',
+      id: component.$store.state.channel.id,
+    },
+  } : {};
+
+  return component.updateMyCart({
+    addLineItem: {
+      sku: component.sku,
+      quantity: Number(component.quantity),
+      ...distributionChannel,
+      ...supplyChannel,
+      ...customType
+    },
+  })
+
+}
 export const productSlug = (component,lineItem)=>
   lineItem.productSlug?.[locale(component)] 
   || lineItem.productSlug

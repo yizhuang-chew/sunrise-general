@@ -84,6 +84,7 @@ const getProducts = (component) => {
         pageSize: component.limit,
         priceCurrency: currency,
         priceCountry: country,
+        expand: ['productType'],
         ...sort,
         ...priceFilter,
         ...searchText,
@@ -100,9 +101,10 @@ const getProducts = (component) => {
       ...meta,
       results: results.map(
         ({
-          id, masterVariant: { sku, images, price }, name, slug,
+          id, productType, masterVariant: { sku, images, price }, name, slug,
         }) => ({
           id,
+          productType: productType.obj.key,
           masterData: {
             current: {
               name: name[loc],

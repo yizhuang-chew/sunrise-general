@@ -7,7 +7,7 @@
     <div class="product-wrap mb-50">
       <div class="product-img mb-25">
         <router-link
-          :to="productRoute(currentProduct.slug, matchingVariant.sku)"
+          :to="productRoute(currentProduct.slug, matchingVariant.sku, product.productType)"
         >
           <img
             class="default-img"
@@ -42,7 +42,7 @@
       <div class="product-content text-center mt-15">
         <h3>
           <router-link
-            :to="productRoute(currentProduct.slug, matchingVariant.sku)"
+            :to="productRoute(currentProduct.slug, matchingVariant.sku, product.productType)"
             data-test="product-thumbnail-name"
             >{{ currentProduct.name }}
           </router-link>
