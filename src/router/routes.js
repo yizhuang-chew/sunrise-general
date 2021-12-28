@@ -10,6 +10,7 @@ import PageUserAccount from '../components/useraccount/PageUserAccount/PageUserA
 import PageNotFound from '../components/common/PageNotFound/PageNotFound.vue';
 import PageProductDetail from '../components/productdetail/PageProductDetail/PageProductDetail.vue';
 import PageRentalProductDetail from '../components/rentalproductdetail/PageProductDetail/PageProductDetail.vue';
+import PageGiftProductDetail from '../components/giftproductdetail/PageProductDetail/PageProductDetail.vue';
 import PageShoppingList from '../components/cartdetail/PageShoppingList/PageShoppingList.vue';
 import ListDetail from '../components/cartdetail/PageShoppingList/ListDetail/ListDetail.vue';
 import PageCartDetail from '../components/cartdetail/PageCartDetail/PageCartDetail.vue';
@@ -149,6 +150,20 @@ export default [
         name: 'rentalproduct',
         components: {
           default: PageRentalProductDetail,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+        props: {
+          default: true,
+          header: false,
+          footer: false,
+        },
+      },
+      {
+        path: 'giftproduct/:productSlug/:sku',
+        name: 'giftproduct',
+        components: {
+          default: PageGiftProductDetail,
           header: TheHeader,
           footer: TheFooter,
         },
