@@ -103,9 +103,6 @@ export default {
               ...MenuCategoryInfo
               children {
                 ...MenuCategoryInfo
-                children {
-                  ...MenuCategoryInfo
-                }
               }
             }
           }

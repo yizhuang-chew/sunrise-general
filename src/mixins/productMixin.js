@@ -18,9 +18,15 @@ export default {
     },
 
     productRoute(productSlug, sku, productType) {
-      if(productType=="RentalDevice"){
+      if(productType=="Rental_RentalDevice"){
         return {
           name: 'rentalproduct',
+          params: { productSlug, sku },
+        };
+      }
+      if(productType=="GiftCard"){
+        return {
+          name: 'giftproduct',
           params: { productSlug, sku },
         };
       }

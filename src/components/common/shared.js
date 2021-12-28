@@ -242,6 +242,77 @@ export const addRental = async (component) => {
   })
 
 }
+export const addLineGiftCard = async (component) => {
+  if (!component.cartExists) {
+    await component.createMyCart({
+      currency: component.$store.state.currency,
+      country: component.$store.state.country,
+      shippingAddress: { country: component.$store.state.country },
+    });
+  }
+  const distributionChannel = component.$store.state.channel ? {
+    distributionChannel: {
+      typeId: 'channel',
+      id: component.$store.state.channel.id,
+    },
+  } : {};
+  const supplyChannel = component.$store.state.channel ? {
+    supplyChannel: {
+      typeId: 'channel',
+      id: component.$store.state.channel.id,
+    },
+  } : {};
+
+  return component.updateCart({
+    addLineItem: {
+      sku: component.sku,
+      quantity: Number(component.quantity),
+      ...distributionChannel,
+      ...supplyChannel,
+      externalTotalPrice: {
+        price: {
+          centPrecision: {
+            currencyCode: component.$store.state.currency,
+            centAmount: Number(component.giftCardAmount) * 100,
+          },
+        },
+        totalPrice: {
+          currencyCode: component.$store.state.currency,
+          centAmount: Number(component.giftCardAmount) * 100,
+        },
+      },
+      custom: {
+        typeKey: 'GiftCard',
+        fields: [{
+          name: 'DeliveryDate',
+          value: `"${component.deliveryDate}"`,
+        },
+        {
+          name: 'To',
+          value: `"${component.to}"`,
+        },
+        {
+          name: 'RecipientEmail',
+          value: `"${component.recipientEmail}"`,
+        },
+        {
+          name: 'From',
+          value: `"${component.from}"`,
+        },
+        {
+          name: 'FromEmail',
+          value: `"${component.fromEmail}"`,
+        },
+        {
+          name: 'Message',
+          value: `"${component.message}"`,
+        },
+        ],
+      },
+    },
+  })
+
+}
 export const productSlug = (component,lineItem)=>
   lineItem.productSlug?.[locale(component)] 
   || lineItem.productSlug
