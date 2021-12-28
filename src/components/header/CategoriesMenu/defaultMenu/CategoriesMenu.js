@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import config from "../../../../../sunrise.config";
 import {
   locale,
   isToughDevice,
@@ -93,10 +94,10 @@ export default {
   apollo: {
     categories: {
       query: gql`
-        query categories($locale: Locale!) {
+        query categories($locale: Locale!, $where:String!) {
           categories(
             limit: 10
-            where: "parent is not defined"
+            where: $where
             sort: "orderHint asc"
           ) {
             results {
@@ -118,6 +119,7 @@ export default {
       variables() {
         return {
           locale: locale(this),
+          where: config.mainCategory?'parent(id="'+config.mainCategory+'")':'parent is not defined',
         };
       },
     },

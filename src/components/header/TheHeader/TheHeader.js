@@ -5,6 +5,7 @@ import MiniCart from "../MiniCart/MiniCart.vue";
 import cartMixin from "../../../mixins/cartMixin";
 import { inject, computed } from '@vue/composition-api';
 import { SHOPPING_LIST } from "../../../composition/useShoppingList";
+import config from "../../../../sunrise.config";
 
 export default {
   components: {
@@ -18,6 +19,7 @@ export default {
       searchText: this.$route.query.q || "",
       mobileMenuOpen: false,
       searchOpen: false,
+        logo: config.logo,
     };
   },
   setup() {
