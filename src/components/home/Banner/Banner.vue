@@ -58,7 +58,8 @@
       </div>
     </carousel>
   </div>
-  <div v-if="slidingBanners" class="slider-area">
+  <div v-if="slidingBanners && slidingBanners.length>0" class="slider-area">
+    
    <carousel
       animateIn="fadeIn"
       animateOut="fadeOut"
@@ -67,11 +68,13 @@
       :autoplay="true"
       :items="1"
       class="slider-active-1 nav-style-2"
+      v-model="slidingBanners"
+      v-once
     >
       <div v-for="banner in slidingBanners" 
       :key="banner.url"
       class="single-slider bg-img slider-height-2 align-items-center custom-d-flex"
-      :style="'background-image:url(' + banner.url +')'">
+      :style="'background-image:url(' + banner.url + ')'">
       </div>
     </carousel>
   </div>
