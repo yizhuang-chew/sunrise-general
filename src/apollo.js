@@ -40,8 +40,27 @@ function createClient() {
   }).apolloClient;
 }
 export const apolloClient = createClient();
+
+const contentfulLink = setContext(() => ({
+  headers: {
+    Authorization: `Bearer ${config.ctf.auth.token}`,
+  },
+}));
+
+const createContentfulClient = createApolloClient({
+  httpEndpoint: `https://graphql.contentful.com/content/v1/spaces/${config.ctf.auth.spaceId}`,
+  cache: new InMemoryCache(),
+  link: contentfulLink,
+});
+
+const contentfulApolloClient = createContentfulClient.apolloClient;
+
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
+  clients: {
+    apolloClient,
+    contentfulApolloClient,
+  },
   errorHandler(error) {
     // eslint-disable-next-line no-console
     console.error('An error occurred in a request to commercetools', error);

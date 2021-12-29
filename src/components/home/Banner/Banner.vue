@@ -2,7 +2,8 @@
 <i18n src="./Banner.txt"></i18n>
 
 <template>
-  <div class="slider-area">
+<div>
+  <div v-if="!slidingBanners" class="slider-area">
     <carousel
       animateIn="fadeIn"
       animateOut="fadeOut"
@@ -57,4 +58,22 @@
       </div>
     </carousel>
   </div>
+  <div v-if="slidingBanners" class="slider-area">
+   <carousel
+      animateIn="fadeIn"
+      animateOut="fadeOut"
+      :autoplayHoverPause="false"
+      :nav="false"
+      :autoplay="true"
+      :items="1"
+      class="slider-active-1 nav-style-2"
+    >
+      <div v-for="banner in slidingBanners" 
+      :key="banner.url"
+      class="single-slider bg-img slider-height-2 align-items-center custom-d-flex"
+      :style="'background-image:url(' + banner.url +')'">
+      </div>
+    </carousel>
+  </div>
+</div>
 </template>

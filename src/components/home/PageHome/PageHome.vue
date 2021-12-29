@@ -3,9 +3,9 @@
 
 <template>
 <span>
-  <Banner />
+  <Banner :slidingBanners="slidingBannersCollection"/>
 
-  <div class="banner-area pt-30">
+  <div v-if="!displayFromContent" class="banner-area pt-30">
     <div class="custom-container">
       <div class="row">
         <div class="col-lg-4 col-md-4 col-xs-12">
@@ -73,6 +73,82 @@
                 <img src="assets/img/s3.jpg" alt="banner" />
                 <div class="banner-content">
                   <h3>BATHING SUITS</h3>
+                </div>
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-if="displayFromContent && bottomLeftBanner" class="banner-area pt-30">
+    <div class="custom-container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-xs-12">
+          <div
+            class="banner-wrap mb-30 wow fadeIn"
+            data-wow-duration="1s"
+            data-wow-delay="0.2s"
+          >
+            <div class="banner-img banner-hover banner-zoom">
+              <router-link
+                :to="{ name: 'products', params: { categorySlug: 'women-clothing-jeans' } }"
+              >
+                <img :src="bottomLeftBanner.url" alt="banner" />
+                <div class="banner-content">
+                  <h3>{{bottomLeftBanner.title}}</h3>
+                </div>
+              </router-link>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-12">
+          <div
+            class="banner-wrap mb-30 wow fadeIn"
+            data-wow-duration="1s"
+            data-wow-delay="0.2s"
+          >
+            <div class="banner-img banner-hover banner-zoom">
+              <router-link
+                :to="{ name: 'products', params: { categorySlug: 'men-shoes-sneakers' } }"
+              >
+                <img :src="bottomMiddleTopBanner.url" alt="banner" />
+                <div class="banner-content">
+                  <h3>{{bottomMiddleTopBanner.title}}</h3>
+                </div>
+              </router-link>
+            </div>
+          </div>
+          <div
+            class="banner-wrap mb-30 wow fadeIn"
+            data-wow-duration="1s"
+            data-wow-delay="0.3s"
+          >
+            <div class="banner-img banner-hover banner-zoom">
+              <router-link
+                :to="{ name: 'products', params: { categorySlug: 'accessories' } }"
+              >
+                <img :src="bottomMiddleBottomBanner.url" alt="banner" />
+                <div class="banner-content">
+                  <h3>{{bottomMiddleBottomBanner.title}}</h3>
+                </div>
+              </router-link>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-12">
+          <div
+            class="banner-wrap mb-30 wow fadeIn"
+            data-wow-duration="1s"
+            data-wow-delay="0.2s"
+          >
+            <div class="banner-img banner-hover banner-zoom">
+              <router-link
+                :to="{ name: 'products', params: { categorySlug: 'women-clothing-swimwear' } }"
+              >
+                <img :src="bottomRightBanner.url" alt="banner" />
+                <div class="banner-content">
+                  <h3>{{bottomRightBanner.title}}</h3>
                 </div>
               </router-link>
             </div>

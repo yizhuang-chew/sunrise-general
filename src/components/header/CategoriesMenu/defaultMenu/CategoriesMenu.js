@@ -1,5 +1,4 @@
 import gql from "graphql-tag";
-import config from "../../../../../sunrise.config";
 import {
   locale,
   isToughDevice,
@@ -14,6 +13,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    mainCategory:{
+      type:String,
+    }
   },
   data: () => ({
     categories: null,
@@ -119,7 +121,7 @@ export default {
       variables() {
         return {
           locale: locale(this),
-          where: config.mainCategory?'parent(id="'+config.mainCategory+'")':'parent is not defined',
+          where: this.mainCategory?'parent(id="'+this.mainCategory+'")':'parent is not defined',
         };
       },
     },

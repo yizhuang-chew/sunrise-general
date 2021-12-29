@@ -60,7 +60,8 @@
                   <div
                     class="main-menu menu-lh-3 main-menu-blod main-menu-center"
                   >
-                    <CategoriesMenu />
+                    <CategoriesMenu 
+                      :mainCategory="mainCategory"/>
                   </div>
                 </div>
                 <div class="col-xl-2 col-lg-3">
