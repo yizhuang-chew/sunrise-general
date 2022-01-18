@@ -1,14 +1,14 @@
-import config from '../../../sunrise.config';
+import config from "../../../sunrise.config";
 
 export function getValue(value, language) {
-  if (typeof value === 'object' && typeof value?.label === "string") {
+  if (typeof value === "object" && typeof value?.label === "string") {
     return value.label;
   }
-  if (typeof value === 'object' && typeof value?.[language] === "string") {
+  if (typeof value === "object" && typeof value?.[language] === "string") {
     return value?.[language];
   }
   if (
-    typeof value === 'object' && 
+    typeof value === "object" &&
     typeof value?.label === "object" &&
     typeof value?.label?.[language] === "string"
   ) {
@@ -23,28 +23,36 @@ export function totalPrice(lineItem) {
     centAmount: unitCentAmount * lineItem.quantity,
   };
   const price = { value: originalPrice };
-  const discount = (lineItem.totalPrice.centAmount);
+  const discount = lineItem.totalPrice.centAmount;
   if (originalPrice.centAmount !== discount) {
-    price.discounted = { value: { ...lineItem.totalPrice, centAmount: discount } };
+    price.discounted = {
+      value: { ...lineItem.totalPrice, centAmount: discount },
+    };
   }
   return price;
 }
 export function subTotal(cartLike) {
   const { currencyCode, fractionDigits } = cartLike.totalPrice;
-  const priceCentAmount = cartLike.lineItems
-    .reduce((acc, li) => acc + (li.quantity * li.price.value.centAmount), 0);
-  const totalPriceCentAmount = cartLike.lineItems.reduce((acc, li) => acc + li.totalPrice.centAmount, 0);
-  const discounted = priceCentAmount === totalPriceCentAmount
-    ? {}
-    : {
-      discounted: {
-        value: {
-          centAmount: totalPriceCentAmount,
-          currencyCode,
-          fractionDigits,
-        },
-      },
-    };
+  const priceCentAmount = cartLike.lineItems.reduce(
+    (acc, li) => acc + li.quantity * li.price.value.centAmount,
+    0
+  );
+  const totalPriceCentAmount = cartLike.lineItems.reduce(
+    (acc, li) => acc + li.totalPrice.centAmount,
+    0
+  );
+  const discounted =
+    priceCentAmount === totalPriceCentAmount
+      ? {}
+      : {
+          discounted: {
+            value: {
+              centAmount: totalPriceCentAmount,
+              currencyCode,
+              fractionDigits,
+            },
+          },
+        };
   return {
     value: {
       centAmount: priceCentAmount,
@@ -54,23 +62,27 @@ export function subTotal(cartLike) {
     ...discounted,
   };
 }
-export function variantAttributes(variant, language, variantNames = config.variantInProductName) {
-  const attributes = (variant?.attributesRaw || []).map(
-    ({ attributeDefinition: { name, label, type }, value }) => [
-      name, label, getValue(type.name, value, language),
-    ],
-  );
+export function variantAttributes(
+  variant,
+  language,
+  variantNames = config.variantInProductName
+) {
+  const attributes = (
+    variant?.attributesRaw || []
+  ).map(({ attributeDefinition: { name, label, type }, value }) => [
+    name,
+    label,
+    getValue(type.name, value, language),
+  ]);
 
-  return variantNames.map(
-    (attributeName) => attributes.find(([name]) => name === attributeName),
-  ).filter((x) => x).map(
-    ([, name, value]) => ({ name, value }),
-  );
+  return variantNames
+    .map((attributeName) => attributes.find(([name]) => name === attributeName))
+    .filter((x) => x)
+    .map(([, name, value]) => ({ name, value }));
 }
 export const pageFromRoute = (route) => {
   const pageNum = Number(route.params.page);
-  const page = Number.isNaN(pageNum) || pageNum <= 1
-    ? 1 : pageNum;
+  const page = Number.isNaN(pageNum) || pageNum <= 1 ? 1 : pageNum;
   return {
     page,
   };
@@ -83,7 +95,12 @@ export const pushPage = (page, component, name) => {
     query,
   });
 };
-export const changeRoute = (route, component, push = true, keepScrollPosition = true) => {
+export const changeRoute = (
+  route,
+  component,
+  push = true,
+  keepScrollPosition = true
+) => {
   const pos = {
     top: window.scrollY,
     left: window.scrollX,
@@ -95,15 +112,14 @@ export const changeRoute = (route, component, push = true, keepScrollPosition = 
   }
 
   if (keepScrollPosition) {
-    Promise.resolve().then(
-      () => { window.scrollTo(pos); },
-    );
+    Promise.resolve().then(() => {
+      window.scrollTo(pos);
+    });
   }
 };
 export const locale = (component) => {
   //get case insensitive locale from sunrise config
-  const loc = //locale from url to upper case
-  (component?.$route?.params?.locale || "").toUpperCase();
+  const loc = (component?.$route?.params?.locale || "").toUpperCase(); //locale from url to upper case
   const [, fromConfig] =
     Object.keys(config.languages)
       //all locale keys from config in [UPPERCASE,org]
@@ -111,56 +127,54 @@ export const locale = (component) => {
       .find(([key]) => key === loc) || []; //find the one from url
   return fromConfig; //return value from config (in correct case)
 };
-export const localeFromString = loc => locale({
-  $route:{
-    params:{ locale:loc }
-  }
-});
-export const isToughDevice = () => 'ontouchstart' in window;
+export const localeFromString = (loc) =>
+  locale({
+    $route: {
+      params: { locale: loc },
+    },
+  });
+export const isToughDevice = () => "ontouchstart" in window;
 export const modifyQuery = (key, value, query, add = true) => {
-  const values = [value]
-    .concat(query[key])
-    .filter((v) => add || v !== value);
-  let newValue = [...new Set(values)]
-    .filter((v) => v !== undefined);
-  newValue = (newValue.length > 1) ? newValue : newValue[0];
-  return (newValue !== undefined)
+  const values = [value].concat(query[key]).filter((v) => add || v !== value);
+  let newValue = [...new Set(values)].filter((v) => v !== undefined);
+  newValue = newValue.length > 1 ? newValue : newValue[0];
+  return newValue !== undefined
     ? {
-      ...query,
-      [key]: newValue,
-    }
+        ...query,
+        [key]: newValue,
+      }
     : Object.entries(query).reduce(
-      // eslint-disable-next-line no-shadow
-      (result, [k, value]) => {
-        if (k !== key) {
-        // eslint-disable-next-line no-param-reassign
-          result[k] = value;
-        }
-        return result;
-      }, {},
-    );
+        // eslint-disable-next-line no-shadow
+        (result, [k, value]) => {
+          if (k !== key) {
+            // eslint-disable-next-line no-param-reassign
+            result[k] = value;
+          }
+          return result;
+        },
+        {}
+      );
 };
 export function debounce(fn, time = 500) {
   let timeout;
   return function debounced(...args) {
     clearTimeout(timeout);
-    timeout = setTimeout(
-      () => fn(...args), time,
-    );
+    timeout = setTimeout(() => fn(...args), time);
   };
 }
-const arrayToString = value => Array.isArray(value)?value.join(', '):value
-export function productAttributes(attributes,locale) {
-  return config.detailAttributes.map(
-    ({name:n,label}) => {
+const arrayToString = (value) =>
+  Array.isArray(value) ? value.join(", ") : value;
+export function productAttributes(attributes, locale) {
+  return config.detailAttributes
+    .map(({ name: n, label }) => {
       const value = attributes.find(([name]) => name === n)?.[1];
-      return value ? [label[locale], value] : false
-    },
-  ).filter((x) => x).map(
-    ([name, value]) => ({ name, value:arrayToString(value) }),
-  );
+      return value ? [label[locale], value] : false;
+    })
+    .filter((x) => x)
+    .map(([name, value]) => ({ name, value: arrayToString(value) }));
 }
 export const addLine = async (component) => {
+  var cartActions = [];
   if (!component.cartExists) {
     await component.createMyCart({
       currency: component.$store.state.currency,
@@ -168,47 +182,68 @@ export const addLine = async (component) => {
       shippingAddress: { country: component.$store.state.country },
     });
   }
-  const distributionChannel = component.$store.state.channel ? {
-    distributionChannel: {
-      typeId: 'channel',
-      id: component.$store.state.channel.id,
-    },
-  } : {};
-  const supplyChannel = component.$store.state.channel ? {
-    supplyChannel: {
-      typeId: 'channel',
-      id: component.$store.state.channel.id,
-    },
-  } : {};
-
-  return component.updateMyCart({
+  const distributionChannel = component.$store.state.channel
+    ? {
+        distributionChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+  const supplyChannel = component.$store.state.channel
+    ? {
+        supplyChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+  cartActions.push({
     addLineItem: {
       sku: component.sku,
       quantity: Number(component.quantity),
       ...distributionChannel,
-      ...supplyChannel
+      ...supplyChannel,
     },
-  })
+  });
 
-}
-export const addRental = async (component) => {
-
-  let customType = {
+  if (component.selectedAddOns && component.selectedAddOns != '') {
+    for (var addOn in component.selectedAddOns) {
+      cartActions.push({
+        addLineItem: {
+          sku: component.selectedAddOns[addOn],
+          quantity: Number(component.quantity),
+          ...distributionChannel,
+          ...supplyChannel,
+          custom: {
+            typeKey: 'AddOns',
+            fields: [
+              {
+                name: 'ReferenceItem',
+                value: `"${component.sku}"`,
+              }
+            ]
+          }
+        },
+      })
+    }
   }
+  return component.updateMyCart(cartActions);
+};
+export const addRental = async (component) => {
+  let customType = {};
 
-  if (component.selectedChannelName && component.selectedChannelName != '') {
-    customType={
+  if (component.selectedChannelName && component.selectedChannelName != "") {
+    customType = {
       custom: {
-        typeKey: 'RentalPlan',
-        fields: []
-      }
+        typeKey: "RentalPlan",
+        fields: [],
+      },
     };
-    customType.custom.fields.push(
-      {
-        name: 'PlanType',
-        value: `"${component.selectedChannelName}"`,
-      }
-    )
+    customType.custom.fields.push({
+      name: "PlanType",
+      value: `"${component.selectedChannelName}"`,
+    });
   }
 
   if (!component.cartExists) {
@@ -218,18 +253,22 @@ export const addRental = async (component) => {
       shippingAddress: { country: component.$store.state.country },
     });
   }
-  const distributionChannel = component.selectedChannel ? {
-    distributionChannel: {
-      typeId: 'channel',
-      id: component.selectedChannel,
-    },
-  } : {};
-  const supplyChannel = component.$store.state.channel ? {
-    supplyChannel: {
-      typeId: 'channel',
-      id: component.$store.state.channel.id,
-    },
-  } : {};
+  const distributionChannel = component.selectedChannel
+    ? {
+        distributionChannel: {
+          typeId: "channel",
+          id: component.selectedChannel,
+        },
+      }
+    : {};
+  const supplyChannel = component.$store.state.channel
+    ? {
+        supplyChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
 
   return component.updateMyCart({
     addLineItem: {
@@ -237,11 +276,10 @@ export const addRental = async (component) => {
       quantity: Number(component.quantity),
       ...distributionChannel,
       ...supplyChannel,
-      ...customType
+      ...customType,
     },
-  })
-
-}
+  });
+};
 export const addLineGiftCard = async (component) => {
   if (!component.cartExists) {
     await component.createMyCart({
@@ -250,18 +288,22 @@ export const addLineGiftCard = async (component) => {
       shippingAddress: { country: component.$store.state.country },
     });
   }
-  const distributionChannel = component.$store.state.channel ? {
-    distributionChannel: {
-      typeId: 'channel',
-      id: component.$store.state.channel.id,
-    },
-  } : {};
-  const supplyChannel = component.$store.state.channel ? {
-    supplyChannel: {
-      typeId: 'channel',
-      id: component.$store.state.channel.id,
-    },
-  } : {};
+  const distributionChannel = component.$store.state.channel
+    ? {
+        distributionChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+  const supplyChannel = component.$store.state.channel
+    ? {
+        supplyChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
 
   return component.updateCart({
     addLineItem: {
@@ -282,37 +324,36 @@ export const addLineGiftCard = async (component) => {
         },
       },
       custom: {
-        typeKey: 'GiftCard',
-        fields: [{
-          name: 'DeliveryDate',
-          value: `"${component.deliveryDate}"`,
-        },
-        {
-          name: 'To',
-          value: `"${component.to}"`,
-        },
-        {
-          name: 'RecipientEmail',
-          value: `"${component.recipientEmail}"`,
-        },
-        {
-          name: 'From',
-          value: `"${component.from}"`,
-        },
-        {
-          name: 'FromEmail',
-          value: `"${component.fromEmail}"`,
-        },
-        {
-          name: 'Message',
-          value: `"${component.message}"`,
-        },
+        typeKey: "GiftCard",
+        fields: [
+          {
+            name: "DeliveryDate",
+            value: `"${component.deliveryDate}"`,
+          },
+          {
+            name: "To",
+            value: `"${component.to}"`,
+          },
+          {
+            name: "RecipientEmail",
+            value: `"${component.recipientEmail}"`,
+          },
+          {
+            name: "From",
+            value: `"${component.from}"`,
+          },
+          {
+            name: "FromEmail",
+            value: `"${component.fromEmail}"`,
+          },
+          {
+            name: "Message",
+            value: `"${component.message}"`,
+          },
         ],
       },
     },
-  })
-
-}
-export const productSlug = (component,lineItem)=>
-  lineItem.productSlug?.[locale(component)] 
-  || lineItem.productSlug
+  });
+};
+export const productSlug = (component, lineItem) =>
+  lineItem.productSlug?.[locale(component)] || lineItem.productSlug;

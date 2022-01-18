@@ -24,6 +24,17 @@ export default {
       this.$emit('open-add-shopping-list', { slug: this.currentProduct.slug, sku: this.currentProduct.sku });
     }
   },
+  computed: {
+    addOns() {
+      var addOns = []
+      for(var attribute in this.masterVariant.attributes){
+        if(this.masterVariant.attributes[attribute].name=='addOns'){
+          addOns = addOns.concat(this.masterVariant.attributes[attribute].value);
+        }
+      }
+      return addOns;
+    }
+  },
   components: {
     DetailsSection,
     ProductGallery,

@@ -28,6 +28,7 @@
           :sku="sku"
           :isOnStock="isOnStock"
           :availableQuantity="availableQuantity"
+          :addOns="addOns"
         />
         <a href @click.prevent="openAddToShoppingList">
           <i class="dl-icon-heart"></i><span>Shopping list</span>
