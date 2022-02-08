@@ -5,6 +5,12 @@
 <template>
   <div>
     <div class="product-dec-action-wrap pro-dec-action-2">
+      <div v-if="appointmentDate" class="pro-details-size">
+        <label class="field-label">
+          <span class="field-label-text" data-test="form-label-text">Appointment Date</span>
+          <input class="dateInput" type="date" v-model="appointmentDateInput" />
+        </label>
+      </div>
       <div v-if="addOnOptions && addOnOptions.length" class="pro-details-size">
         <span style="margin-left: 3px">Add Ons</span>
         <vue-select-image

@@ -22,6 +22,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    appointmentDate:{
+      type: Boolean,
+      required: false,
+    },
     availableQuantity: {
       type: Number,
       required: false,
@@ -45,6 +49,7 @@ export default {
     showQuantityError: false,
     addOnOptions: null,
     selectedAddOns: null,
+    appointmentDateInput: null,
   }),
   computed: {
     isLoading() {

@@ -33,7 +33,16 @@ export default {
         }
       }
       return addOns;
-    }
+    },
+    appointmentDate(){
+      var appointmentDate = false;
+      for(var attribute in this.masterVariant.attributes){
+        if(this.masterVariant.attributes[attribute].name=='AppointmentDate'){
+          appointmentDate = this.masterVariant.attributes[attribute].value;
+        }
+      }
+      return appointmentDate;
+    },
   },
   components: {
     DetailsSection,

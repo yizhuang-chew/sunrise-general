@@ -14,13 +14,15 @@
   margin-right: 0.6em;
 }
 .vue-select-image__wrapper {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  
   overflow: auto;
   list-style-image: none;
   list-style-position: outside;
   list-style-type: none;
   padding: 0px;
   margin: 0px;
-  display: table;
   width: 100%;
 }
 
@@ -87,4 +89,7 @@
 .vue-select-image__lbl{
   text-align: center;
   width: 100%;
+}
+.dateInput{
+  background: white;
 }
