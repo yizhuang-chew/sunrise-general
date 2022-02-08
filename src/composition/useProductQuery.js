@@ -70,9 +70,12 @@ export default (props,ctx,sku=ref(null),id,variantId) => {
         const name = p?.name[locale.value]
         const slug = p?.slug[locale.value]
         const productType=p?.productType?.obj.key;
+        const description = p?.description? p?.description[locale.value] : '';
+
         const allVariants = p.variants.concat(p.masterVariant).map(
-          p=>({...p,productType,name,slug})
+          p=>({...p,productType,name,slug,description})
         )
+        allVariants.unshift(allVariants.pop());
         variants.value = allVariants;
         product.value = allVariants.find(v=>sku.value
           ? v.sku===sku.value

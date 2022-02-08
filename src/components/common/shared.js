@@ -162,8 +162,16 @@ export function debounce(fn, time = 500) {
     timeout = setTimeout(() => fn(...args), time);
   };
 }
-const arrayToString = (value) =>
-  Array.isArray(value) ? value.join(", ") : value;
+const arrayToString = (value, locale) => {
+  return Array.isArray(value)
+    ? value
+        .map(function(elem) {
+          return elem[locale];
+        })
+        .join(", ")
+    : value;
+ };
+ 
 export function productAttributes(attributes, locale) {
   return config.detailAttributes
     .map(({ name: n, label }) => {
@@ -171,10 +179,22 @@ export function productAttributes(attributes, locale) {
       return value ? [label[locale], value] : false;
     })
     .filter((x) => x)
-    .map(([name, value]) => ({ name, value: arrayToString(value) }));
+    .map(([name, value]) => ({ name, value: arrayToString(value, locale) }));
 }
 export const addLine = async (component) => {
   var cartActions = [];
+
+  let itemCustomType = component.appointmentDateInput ? {
+    custom: {
+      typeKey: 'AppointmentItem',
+      fields: [{
+        name: 'AppointmentDate',
+        value: `"${component.appointmentDateInput}"`,
+      },
+      ]
+    }
+  } : {};
+
   if (!component.cartExists) {
     await component.createMyCart({
       currency: component.$store.state.currency,
@@ -204,6 +224,7 @@ export const addLine = async (component) => {
       quantity: Number(component.quantity),
       ...distributionChannel,
       ...supplyChannel,
+      ...itemCustomType,
     },
   });
 

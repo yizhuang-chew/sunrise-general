@@ -20,6 +20,9 @@
         <h3>
           <BasePrice :price="currentProduct.price" />
         </h3>
+        <h4 data-test="product-name">
+          {{ currentProduct.description }}
+        </h4>
         <VariantSelector :sku="sku" />
         <div v-if="availableQ">
           {{ $t("available") }}: {{ availableQuantity }}
@@ -29,6 +32,7 @@
           :isOnStock="isOnStock"
           :availableQuantity="availableQuantity"
           :addOns="addOns"
+          :appointmentDate="appointmentDate"
         />
         <a href @click.prevent="openAddToShoppingList">
           <i class="dl-icon-heart"></i><span>Shopping list</span>

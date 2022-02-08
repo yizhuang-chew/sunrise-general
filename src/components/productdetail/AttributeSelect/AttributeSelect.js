@@ -1,5 +1,6 @@
 import { inject } from 'vue-demi';
 import HooverDropdown from '../../common/HoverDropdown/HoverDropdown.vue';
+import config from "../../../../sunrise.config";
 
 export default {
   components: {
@@ -37,16 +38,26 @@ export default {
         return this.selected[this.id];
       },
       set(value) {
-        const sku = this.variantCombinations.find(
-          (combi) => combi[this.id] === value,
-        )?.sku;
-        if (sku) {
-          if(this.onVariantSelect){
-            this.onVariantSelect(sku);
-            return sku;
+        let sku;
+        Object.keys(this.variantCombinations).forEach((key) => {
+          if (this.variantCombinations[key][this.id] === value) {
+            let match = true;
+            Object.keys(config.variantSelector).forEach((attribute) => {
+              if (
+                match
+                && this.variantCombinations[key][config.variantSelector[attribute]]
+                && config.variantSelector[attribute] !== this.id
+                && this.selected[config.variantSelector[attribute]]
+                !== this.variantCombinations[key][config.variantSelector[attribute]]) {
+                match = false;
+              }
+            });
+            if (match) {
+              sku = this.variantCombinations[key].sku;
+            }
           }
-          this.$router.push({ path: sku })
-        }
+        });
+        this.$router.push({ path: sku });
       },
     },
   },
