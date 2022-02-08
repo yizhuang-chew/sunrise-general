@@ -17,9 +17,9 @@
         <h2 data-test="product-name">
           {{ currentProduct.name }}
         </h2>
-        <!--<h3>
+        <h3>
           <BasePrice :price="currentProduct.price" />
-        </h3>-->
+        </h3>
         <h4 data-test="product-name">
           {{ currentProduct.description }}
         </h4>
@@ -31,12 +31,14 @@
           :sku="sku"
           :isOnStock="isOnStock"
           :availableQuantity="availableQuantity"
+          :addOns="addOns"
+          :appointmentDate="appointmentDate"
         />
         <a href @click.prevent="openAddToShoppingList">
           <i class="dl-icon-heart"></i><span>Shopping list</span>
         </a>
 
-        <DetailsSection :sku="sku" />
+        <!--<DetailsSection :sku="sku" />-->
       </div>
     </div>
   </div>

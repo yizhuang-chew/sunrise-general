@@ -170,8 +170,8 @@ const arrayToString = (value, locale) => {
         })
         .join(", ")
     : value;
- };
- 
+};
+
 export function productAttributes(attributes, locale) {
   return config.detailAttributes
     .map(({ name: n, label }) => {
@@ -184,16 +184,19 @@ export function productAttributes(attributes, locale) {
 export const addLine = async (component) => {
   var cartActions = [];
 
-  let itemCustomType = component.appointmentDateInput ? {
-    custom: {
-      typeKey: 'AppointmentItem',
-      fields: [{
-        name: 'AppointmentDate',
-        value: `"${component.appointmentDateInput}"`,
-      },
-      ]
-    }
-  } : {};
+  let itemCustomType = component.appointmentDateInput
+    ? {
+        custom: {
+          typeKey: "AppointmentItem",
+          fields: [
+            {
+              name: "AppointmentDate",
+              value: `"${component.appointmentDateInput}"`,
+            },
+          ],
+        },
+      }
+    : {};
 
   if (!component.cartExists) {
     await component.createMyCart({
@@ -228,7 +231,7 @@ export const addLine = async (component) => {
     },
   });
 
-  if (component.selectedAddOns && component.selectedAddOns != '') {
+  if (component.selectedAddOns && component.selectedAddOns != "") {
     for (var addOn in component.selectedAddOns) {
       cartActions.push({
         addLineItem: {
@@ -237,16 +240,180 @@ export const addLine = async (component) => {
           ...distributionChannel,
           ...supplyChannel,
           custom: {
-            typeKey: 'AddOns',
+            typeKey: "AddOns",
             fields: [
               {
-                name: 'ReferenceItem',
+                name: "ReferenceItem",
                 value: `"${component.sku}"`,
-              }
-            ]
-          }
+              },
+            ],
+          },
         },
-      })
+      });
+    }
+  }
+  return component.updateMyCart(cartActions);
+};
+export const addGiftBundleLine = async (component) => {
+  var cartActions = [];
+
+  if (!component.cartExists) {
+    await component.createMyCart({
+      currency: component.$store.state.currency,
+      country: component.$store.state.country,
+      shippingAddress: { country: component.$store.state.country },
+    });
+  }
+
+  const distributionChannel = component.$store.state.channel
+    ? {
+        distributionChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+  const supplyChannel = component.$store.state.channel
+    ? {
+        supplyChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+
+  var customType = {
+    custom: {
+      typeKey: "GiftBundle",
+      fields: [],
+    },
+  };
+
+  cartActions.push({
+    addLineItem: {
+      sku: component.sku,
+      quantity: Number(component.quantity),
+      ...distributionChannel,
+      ...supplyChannel,
+      ...customType,
+    },
+  });
+
+  if(component.appointmentDateInput  && component.appointmentDateInput != ""){
+   customType.custom.fields.push({
+              name: "DeliveryDate",
+              value: `"${component.appointmentDateInput}"`
+      });
+  }
+  if (component.selectedJar && component.selectedJar != '') {
+    customType.custom.fields.push(
+      {
+        name: 'SelectedJar',
+        value: `"${component.selectedJar}"`,
+      }
+    )
+    cartActions.push({
+      addLineItem: {
+        sku: component.selectedJar,
+        quantity: Number(component.quantity),
+        ...distributionChannel,
+        ...supplyChannel,
+        custom: {
+          typeKey: 'AddOns',
+          fields: [
+            {
+              name: 'ReferenceItem',
+              value: `"${component.sku}"`,
+            }
+          ]
+        }
+      },
+    })
+    if (component.jarMessage && component.jarMessage != '') {
+      customType.custom.fields.push(
+        {
+          name: 'JarMessage',
+          value: `"${component.jarMessage}"`,
+        }
+      )
+    }
+  }
+
+  if (component.selectedCard && component.selectedCard != '') {
+    customType.custom.fields.push(
+      {
+        name: 'SelectedCard',
+        value: `"${component.selectedCard}"`,
+      }
+    )
+    cartActions.push({
+      addLineItem: {
+        sku: component.selectedCard,
+        quantity: Number(component.quantity),
+        ...distributionChannel,
+        ...supplyChannel,
+        custom: {
+          typeKey: 'AddOns',
+          fields: [
+            {
+              name: 'ReferenceItem',
+              value: `"${component.sku}"`,
+            }
+          ]
+        }
+      },
+    })
+    if (component.to && component.to != '') {
+      customType.custom.fields.push(
+        {
+          name: 'To',
+          value: `"${component.to}"`,
+        }
+      )
+    }
+    if (component.message && component.message != '') {
+      customType.custom.fields.push(
+        {
+          name: 'Message',
+          value: `"${component.message}"`,
+        }
+      )
+    }
+    if (component.from && component.from != '') {
+      customType.custom.fields.push(
+        {
+          name: 'From',
+          value: `"${component.from}"`,
+        }
+      )
+    }
+  }
+
+  if (component.selectedAddOns && component.selectedAddOns != "") {
+    customType.custom.fields.push(
+      {
+        name: 'SelectedAddOns',
+        value: `["${component.selectedAddOns}"]`,
+      }
+    )
+    for (var addOn in component.selectedAddOns) {
+      cartActions.push({
+        addLineItem: {
+          sku: component.selectedAddOns[addOn],
+          quantity: Number(component.quantity),
+          ...distributionChannel,
+          ...supplyChannel,
+          custom: {
+            typeKey: "AddOns",
+            fields: [
+              {
+                name: "ReferenceItem",
+                value: `"${component.sku}"`,
+              },
+            ],
+          },
+        },
+      });
     }
   }
   return component.updateMyCart(cartActions);

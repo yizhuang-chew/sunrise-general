@@ -1,29 +1,30 @@
-import config from '../../sunrise.config';
-import TheHeader from '../components/header/TheHeader/TheHeader.vue';
-import TheFooter from '../components/footer/TheFooter/TheFooter.vue';
-import PageHome from '../components/home/PageHome/PageHome.vue';
-import PageProductOverview from '../components/productoverview/PageProductOverview/PageProductOverview.vue';
-import PageLogin from '../components/login/PageLogin/PageLogin.vue';
-import ForgotPassword from '../components/login/ForgotPassword/ForgotPassword.vue';
-import ResetPassword from '../components/login/ResetPassword/ResetPassword.vue';
-import PageUserAccount from '../components/useraccount/PageUserAccount/PageUserAccount.vue';
-import PageNotFound from '../components/common/PageNotFound/PageNotFound.vue';
-import PageProductDetail from '../components/productdetail/PageProductDetail/PageProductDetail.vue';
-import PageRentalProductDetail from '../components/rentalproductdetail/PageProductDetail/PageProductDetail.vue';
-import PageGiftProductDetail from '../components/giftproductdetail/PageProductDetail/PageProductDetail.vue';
-import PageShoppingList from '../components/cartdetail/PageShoppingList/PageShoppingList.vue';
-import ListDetail from '../components/cartdetail/PageShoppingList/ListDetail/ListDetail.vue';
-import PageCartDetail from '../components/cartdetail/PageCartDetail/PageCartDetail.vue';
-import PageStoreLocator from '../components/stores/PageStoreLocator/PageStoreLocator.vue';
-import TabAccountDetails from '../components/useraccount/TabAccountDetails/TabAccountDetails.vue';
-import TabOrderList from '../components/useraccount/TabOrderList/TabOrderList.vue';
-import TabOrderDetail from '../components/useraccount/TabOrderDetail/TabOrderDetail.vue';
-import TabReturn from '../components/useraccount/TabReturn/TabReturn.vue';
-import TabChangePassword from '../components/useraccount/TabChangePassword/TabChangePassword.vue';
-import TabDashboard from '../components/useraccount/TabDashboard/TabDashboard.vue';
-import PageCheckout from '../components/checkout/PageCheckout/PageCheckout.vue';
-import { pageFromRoute } from '../components/common/shared';
-import Root from '../components/root/root.vue';
+import config from "../../sunrise.config";
+import TheHeader from "../components/header/TheHeader/TheHeader.vue";
+import TheFooter from "../components/footer/TheFooter/TheFooter.vue";
+import PageHome from "../components/home/PageHome/PageHome.vue";
+import PageProductOverview from "../components/productoverview/PageProductOverview/PageProductOverview.vue";
+import PageLogin from "../components/login/PageLogin/PageLogin.vue";
+import ForgotPassword from "../components/login/ForgotPassword/ForgotPassword.vue";
+import ResetPassword from "../components/login/ResetPassword/ResetPassword.vue";
+import PageUserAccount from "../components/useraccount/PageUserAccount/PageUserAccount.vue";
+import PageNotFound from "../components/common/PageNotFound/PageNotFound.vue";
+import PageProductDetail from "../components/productdetail/PageProductDetail/PageProductDetail.vue";
+import PageRentalProductDetail from "../components/rentalproductdetail/PageProductDetail/PageProductDetail.vue";
+import PageGiftProductDetail from "../components/giftproductdetail/PageProductDetail/PageProductDetail.vue";
+import PageGiftBundleDetail from "../components/giftbundledetail/PageProductDetail/PageProductDetail.vue";
+import PageShoppingList from "../components/cartdetail/PageShoppingList/PageShoppingList.vue";
+import ListDetail from "../components/cartdetail/PageShoppingList/ListDetail/ListDetail.vue";
+import PageCartDetail from "../components/cartdetail/PageCartDetail/PageCartDetail.vue";
+import PageStoreLocator from "../components/stores/PageStoreLocator/PageStoreLocator.vue";
+import TabAccountDetails from "../components/useraccount/TabAccountDetails/TabAccountDetails.vue";
+import TabOrderList from "../components/useraccount/TabOrderList/TabOrderList.vue";
+import TabOrderDetail from "../components/useraccount/TabOrderDetail/TabOrderDetail.vue";
+import TabReturn from "../components/useraccount/TabReturn/TabReturn.vue";
+import TabChangePassword from "../components/useraccount/TabChangePassword/TabChangePassword.vue";
+import TabDashboard from "../components/useraccount/TabDashboard/TabDashboard.vue";
+import PageCheckout from "../components/checkout/PageCheckout/PageCheckout.vue";
+import { pageFromRoute } from "../components/common/shared";
+import Root from "../components/root/root.vue";
 
 const requiresAuth = true;
 const requiresCart = true;
@@ -31,16 +32,16 @@ const requiresCart = true;
 export default [
   {
     path: `/:country(${
-      Object.keys(config.countries).join('|')
+      Object.keys(config.countries).join("|")
     })?/:locale(${
-      Object.keys(config.languages).join('|')
+      Object.keys(config.languages).join("|")
     })?`,
     props:true,
     component: Root,
     children: [
       {
-        path: '',
-        name: 'home',
+        path: "",
+        name: "home",
         components: {
           default: PageHome,
           header: TheHeader,
@@ -48,8 +49,8 @@ export default [
         },
       },
       {
-        path: 'stores',
-        name: 'stores',
+        path: "stores",
+        name: "stores",
         components: {
           default: PageStoreLocator,
           header: TheHeader,
@@ -57,8 +58,8 @@ export default [
         },
       },
       {
-        path: 'login',
-        name: 'login',
+        path: "login",
+        name: "login",
         components: {
           default: PageLogin,
           header: TheHeader,
@@ -66,8 +67,8 @@ export default [
         },
       },
       {
-        path: 'forgot-password',
-        name: 'forgot-password',
+        path: "forgot-password",
+        name: "forgot-password",
         components: {
           default: ForgotPassword,
           header: TheHeader,
@@ -75,8 +76,8 @@ export default [
         },
       },
       {
-        path: 'reset-password/:token',
-        name: 'reset-password',
+        path: "reset-password/:token",
+        name: "reset-password",
         components: {
           default: ResetPassword,
           header: TheHeader,
@@ -84,8 +85,8 @@ export default [
         },
       },
       {
-        path: 'products/:categorySlug/:page?',
-        name: 'products',
+        path: "products/:categorySlug/:page?",
+        name: "products",
         components: {
           default: PageProductOverview,
           header: TheHeader,
@@ -101,7 +102,7 @@ export default [
         },
       },
       {
-        path: 'user',
+        path: "user",
         meta: { requiresAuth },
         components: {
           default: PageUserAccount,
@@ -110,30 +111,41 @@ export default [
         },
         children: [
           {
-            path: 'dashboard', alias: '', name: 'user', component: TabDashboard,
+            path: "dashboard",
+            alias: "",
+            name: "user",
+            component: TabDashboard,
           },
           {
-            path: 'order/:id', name: 'order', component: TabOrderDetail,
+            path: "order/:id",
+            name: "order",
+            component: TabOrderDetail,
           },
           {
-            path: 'return/:id', name: 'return', component: TabReturn,
+            path: "return/:id",
+            name: "return",
+            component: TabReturn,
           },
           {
-            path: 'orders/:page?',
-            name: 'orders',
+            path: "orders/:page?",
+            name: "orders",
             component: TabOrderList,
           },
           {
-            path: 'account', name: 'account', component: TabAccountDetails,
+            path: "account",
+            name: "account",
+            component: TabAccountDetails,
           },
           {
-            path: 'changepassword', name: 'changepassword', component: TabChangePassword,
+            path: "changepassword",
+            name: "changepassword",
+            component: TabChangePassword,
           },
         ],
       },
       {
-        path: 'product/:productSlug/:sku',
-        name: 'product',
+        path: "product/:productSlug/:sku",
+        name: "product",
         components: {
           default: PageProductDetail,
           header: TheHeader,
@@ -146,8 +158,8 @@ export default [
         },
       },
       {
-        path: 'rentalproduct/:productSlug/:sku',
-        name: 'rentalproduct',
+        path: "rentalproduct/:productSlug/:sku",
+        name: "rentalproduct",
         components: {
           default: PageRentalProductDetail,
           header: TheHeader,
@@ -160,8 +172,8 @@ export default [
         },
       },
       {
-        path: 'giftproduct/:productSlug/:sku',
-        name: 'giftproduct',
+        path: "giftproduct/:productSlug/:sku",
+        name: "giftproduct",
         components: {
           default: PageGiftProductDetail,
           header: TheHeader,
@@ -174,8 +186,22 @@ export default [
         },
       },
       {
-        path: 'cart',
-        name: 'cart',
+        path: "giftbundle/:productSlug/:sku",
+        name: "giftbundle",
+        components: {
+          default: PageGiftBundleDetail,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+        props: {
+          default: true,
+          header: false,
+          footer: false,
+        },
+      },
+      {
+        path: "cart",
+        name: "cart",
         components: {
           default: PageCartDetail,
           header: TheHeader,
@@ -183,8 +209,8 @@ export default [
         },
       },
       {
-        path: 'checkout',
-        name: 'checkout',
+        path: "checkout",
+        name: "checkout",
         meta: { requiresCart },
         components: {
           default: PageCheckout,
@@ -193,8 +219,8 @@ export default [
         },
       },
       {
-        path: 'shopping-list/:listName',
-        name: 'single list',
+        path: "shopping-list/:listName",
+        name: "single list",
         components: {
           default: ListDetail,
           header: TheHeader,
@@ -202,8 +228,8 @@ export default [
         },
       },
       {
-        path: 'shopping-list',
-        name: 'shopping list',
+        path: "shopping-list",
+        name: "shopping list",
         components: {
           default: PageShoppingList,
           header: TheHeader,
@@ -213,7 +239,7 @@ export default [
     ],
   },
   {
-    path: '*',
+    path: "*",
     components: {
       default: PageNotFound,
       header: TheHeader,

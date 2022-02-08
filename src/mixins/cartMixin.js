@@ -163,7 +163,6 @@ export default {
         variables: { draft, withInventory: Boolean(inventoryMode) },
       }).finally(me.refreshCart)
     },
-
     createMyOrder() {
       const me = this;
       return this.$apollo.mutate({
