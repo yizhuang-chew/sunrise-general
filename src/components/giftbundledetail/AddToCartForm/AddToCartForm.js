@@ -71,7 +71,6 @@ export default {
   },
   methods: {
     onSelectJar(data) {
-      console.log(data.id)
       this.selectedJar = data.id
       if (this.selectedJar == 'Personalise the Jar') {
         this.personalizedJar = true;
