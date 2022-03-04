@@ -199,5 +199,67 @@ export default {
         },
       }).finally(me.refreshCart)
     },
+    createAdhocCart(draft) {
+      const inventoryMode = process.env.VUE_APP_INVENTORY_MODE;
+      if(inventoryMode){
+        // eslint-disable-next-line no-param-reassign
+        draft = { 
+          ...draft, 
+          inventoryMode,
+          deleteDaysAfterLastModification:1 };
+      }
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation ($draft: CartDraft!, $withInventory: Boolean!) {
+            createCart(draft: $draft) {
+              id
+              taxedPrice{
+                totalGross{
+                  type
+                  currencyCode
+                  centAmount
+                  fractionDigits
+                }
+              }
+              version
+              inventoryMode @include(if: $withInventory)
+            }
+          }`,
+        variables: { draft, withInventory: Boolean(inventoryMode) },
+      }).then((result) => {
+        return result;
+      })
+    },
+    updateAdhocCart(adhocId, adhocCart, actions) {
+      return Promise.resolve()
+      .then(
+        ()=>{
+          // Issue with under-fetching on mutations https://github.com/apollographql/apollo-client/issues/3267
+          // required any queried field to be fetched in order to update all components using carts, e.g. mini-cart
+          return this.$apollo.mutate({
+            mutation: gql`
+              mutation updateCart($id: String!, $version: Long!, $actions: [CartUpdateAction!]!, $locale: Locale!) {
+                updateCart(id: $id, version: $version, actions: $actions) {
+                  ...CartFields
+                }
+              }
+              ${CART_FRAGMENT}
+              ${MONEY_FRAGMENT}
+              ${ADDRESS_FRAGMENT}`,
+            variables: {
+              actions,
+              id: adhocId,
+              version: adhocCart.version,
+              locale: locale(this),
+            },
+          })
+        }
+      )
+      .then(
+        (result) => {
+          return result;
+        },
+      )
+    },
   },
 };

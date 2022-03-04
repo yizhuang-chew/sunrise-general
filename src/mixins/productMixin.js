@@ -36,6 +36,18 @@ export default {
           params: { productSlug, sku },
         };
       }
+      if(productType=="Food_Pizza"){
+        return {
+          name: 'pizza',
+          params: { productSlug, sku },
+        };
+      }
+      if(productType=="Food_HalfPizza"){
+        return {
+          name: 'halfpizza',
+          params: { productSlug, sku },
+        };
+      }
       return {
         name: 'product',
         params: { productSlug, sku },

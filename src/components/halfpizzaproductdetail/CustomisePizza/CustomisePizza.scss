@@ -1,0 +1,39 @@
+.close:hover {
+  background: none;
+  color: $theme-color;
+  transform: rotate(90deg);
+}
+.attribute-name {
+  color: #989898;
+  font-size: 13px;
+}
+.edit-toppings .deal-head {
+  font-family: "PT Sans",sans-serif;
+  font-size: 80%;
+  color: #888;
+  line-height: 250%;
+  background: #efefef;
+  height: 40px;
+  margin: 3px 0 0;
+  width: 100%;
+  margin-top: 5px; 
+  display:block;
+  padding: 5px;
+}
+.edit-toppings .deal-head span {
+  padding: 4px 22px 4px 10px;
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  font-family: Knockout,sans-serif;
+  font-size: 120%;
+  color: #fff;
+  background: right center no-repeat #F57E01;
+}
+.et-image {
+  width: 85%;
+  height: 45px;
+  background-image: url(https://d16jhsvmsopai9.cloudfront.net/img/misc/topping-sprite-2.2.jpg);
+  background-repeat: no-repeat;
+  background-position: 11px 7px;
+}

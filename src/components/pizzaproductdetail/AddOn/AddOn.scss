@@ -1,0 +1,26 @@
+.addOnDiv {
+  width: 160px;
+  height: 98px;
+  margin-right: 15px;
+  display: inline-flex;
+  padding: 5px;
+}
+.addOnLabel {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: grey;
+}
+.halfDiv {
+  width: 50%;
+  float: left;
+}
+.vue-numeric-input {
+  height: 38px;
+}
+.vue-numeric-input .numeric-input {
+  background: white;
+}
+.orangeBackground .numeric-input {
+  background-color: #FFEADC;
+}

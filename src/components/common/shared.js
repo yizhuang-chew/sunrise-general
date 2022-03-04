@@ -543,5 +543,180 @@ export const addLineGiftCard = async (component) => {
     },
   });
 };
+export const addPizza = async (component) => {
+  var cartActions = [];
+
+  let finalToppings = "";
+  for (const [key, value] of Object.entries(component.selectedToppings)) {
+    if (finalToppings != "") {
+      finalToppings += ",";
+    }
+    finalToppings += '"' + key + " x " + value + '"';
+  }
+
+  let itemCustomType = {
+    custom: {
+      typeKey: "CustomPizza",
+      fields: [
+        {
+          name: "Toppings",
+          value: `[${finalToppings}]`,
+        },
+      ],
+    },
+  };
+
+  if (!component.cartExists) {
+    await component.createMyCart({
+      currency: component.$store.state.currency,
+      country: component.$store.state.country,
+      shippingAddress: { country: component.$store.state.country },
+    });
+  }
+  const distributionChannel = component.$store.state.channel
+    ? {
+        distributionChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+  const supplyChannel = component.$store.state.channel
+    ? {
+        supplyChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+  cartActions.push({
+    addLineItem: {
+      sku: component.sku,
+      quantity: Number(component.quantity),
+      ...distributionChannel,
+      ...supplyChannel,
+      ...itemCustomType,
+    },
+  });
+
+  if (
+    component.adhocCart &&
+    component.adhocCart.lineItems &&
+    component.adhocCart.lineItems.length > 1
+  ) {
+    for (var index in component.adhocCart.lineItems) {
+      if (index != 0) {
+        // 0 is base pizza
+        cartActions.push({
+          addLineItem: {
+            sku: component.adhocCart.lineItems[index].variant.sku,
+            quantity: component.adhocCart.lineItems[index].quantity,
+            ...distributionChannel,
+            ...supplyChannel,
+            custom: {
+              typeKey: "Topping",
+              fields: [
+                {
+                  name: "ReferencePizza",
+                  value: `"${component.sku}"`,
+                },
+              ],
+            },
+          },
+        });
+      }
+    }
+  }
+
+  if (component.selectedAddOns && component.selectedAddOns != "") {
+    for (var addOn in component.selectedAddOns) {
+      cartActions.push({
+        addLineItem: {
+          sku: component.selectedAddOns[addOn],
+          quantity: Number(component.quantity),
+          ...distributionChannel,
+          ...supplyChannel,
+          custom: {
+            typeKey: "AddOns",
+            fields: [
+              {
+                name: "ReferenceItem",
+                value: `"${component.sku}"`,
+              },
+            ],
+          },
+        },
+      });
+    }
+  }
+
+  return component.updateMyCart(cartActions);
+};
+export const addHalfPizza = async (component) => {
+  var cartActions = [];
+
+  let itemCustomType = {
+    custom: {
+      typeKey: "HalfPizza",
+      fields: [
+        {
+          name: "LeftPizza",
+          value: `"${component.sku1}"`,
+        },
+        {
+          name: "RightPizza",
+          value: `"${component.sku2}"`,
+        },
+      ],
+    },
+  };
+
+  if (!component.cartExists) {
+    await component.createMyCart({
+      currency: component.$store.state.currency,
+      country: component.$store.state.country,
+      shippingAddress: { country: component.$store.state.country },
+    });
+  }
+  const distributionChannel = component.$store.state.channel
+    ? {
+        distributionChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+  const supplyChannel = component.$store.state.channel
+    ? {
+        supplyChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+  cartActions.push({
+    addLineItem: {
+      sku: component.sku,
+      quantity: Number(component.quantity),
+      externalTotalPrice: {
+        price: {
+          centPrecision: {
+            currencyCode: component.$store.state.currency,
+            centAmount: component.price1 + component.price2,
+          },
+        },
+        totalPrice: {
+          currencyCode: component.$store.state.currency,
+          centAmount: component.price1 + component.price2,
+        },
+      },
+      ...distributionChannel,
+      ...supplyChannel,
+      ...itemCustomType,
+    },
+  });
+
+  return component.updateCart(cartActions);
+};
 export const productSlug = (component, lineItem) =>
   lineItem.productSlug?.[locale(component)] || lineItem.productSlug;

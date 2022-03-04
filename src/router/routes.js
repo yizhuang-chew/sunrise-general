@@ -12,6 +12,8 @@ import PageProductDetail from "../components/productdetail/PageProductDetail/Pag
 import PageRentalProductDetail from "../components/rentalproductdetail/PageProductDetail/PageProductDetail.vue";
 import PageGiftProductDetail from "../components/giftproductdetail/PageProductDetail/PageProductDetail.vue";
 import PageGiftBundleDetail from "../components/giftbundledetail/PageProductDetail/PageProductDetail.vue";
+import PagePizzaDetail from "../components/pizzaproductdetail/PageProductDetail/PageProductDetail.vue";
+import HalfPizzaDetail from "../components/halfpizzaproductdetail/PageProductDetail/PageProductDetail.vue";
 import PageShoppingList from "../components/cartdetail/PageShoppingList/PageShoppingList.vue";
 import ListDetail from "../components/cartdetail/PageShoppingList/ListDetail/ListDetail.vue";
 import PageCartDetail from "../components/cartdetail/PageCartDetail/PageCartDetail.vue";
@@ -190,6 +192,34 @@ export default [
         name: "giftbundle",
         components: {
           default: PageGiftBundleDetail,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+        props: {
+          default: true,
+          header: false,
+          footer: false,
+        },
+      },
+      {
+        path: "pizza/:productSlug/:sku",
+        name: "pizza",
+        components: {
+          default: PagePizzaDetail,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+        props: {
+          default: true,
+          header: false,
+          footer: false,
+        },
+      },
+      {
+        path: "halfpizza/:productSlug/:sku",
+        name: "halfpizza",
+        components: {
+          default: HalfPizzaDetail,
           header: TheHeader,
           footer: TheFooter,
         },
