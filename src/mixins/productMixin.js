@@ -48,6 +48,12 @@ export default {
           params: { productSlug, sku },
         };
       }
+      if(productType=="Automotive_BaseCar"){
+        return {
+          name: 'car',
+          params: { productSlug, sku },
+        };
+      }
       return {
         name: 'product',
         params: { productSlug, sku },

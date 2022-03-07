@@ -718,5 +718,183 @@ export const addHalfPizza = async (component) => {
 
   return component.updateCart(cartActions);
 };
+
+export const addCarLine = async (component) => {
+  var cartActions = [];
+
+  if (!component.cartExists) {
+    await component.createMyCart({
+      currency: component.$store.state.currency,
+      country: component.$store.state.country,
+      shippingAddress: { country: component.$store.state.country },
+    });
+  }
+
+  const distributionChannel = component.$store.state.channel
+    ? {
+        distributionChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+
+  const supplyChannel = component.$store.state.channel
+    ? {
+        supplyChannel: {
+          typeId: "channel",
+          id: component.$store.state.channel.id,
+        },
+      }
+    : {};
+
+  var customType = {
+    custom: {
+      typeKey: "Car",
+      fields: [],
+    },
+  };
+
+  cartActions.push({
+    addLineItem: {
+      sku: component.sku,
+      quantity: Number(component.quantity),
+      ...distributionChannel,
+      ...supplyChannel,
+      ...customType,
+    },
+  });
+
+  if (component.appointmentDateInput && component.appointmentDateInput != "") {
+    customType.custom.fields.push({
+      name: "CollectionDate",
+      value: `"${component.appointmentDateInput}"`,
+    });
+  }
+  if (component.requestInput && component.requestInput != "") {
+    customType.custom.fields.push({
+      name: "Request",
+      value: `"${component.requestInput}"`,
+    });
+  }
+  if (component.selectedExterior && component.selectedExterior != "") {
+    customType.custom.fields.push({
+      name: "SelectedExterior",
+      value: `"${component.selectedExterior}"`,
+    });
+    cartActions.push({
+      addLineItem: {
+        sku: component.selectedExterior,
+        quantity: Number(component.quantity),
+        ...distributionChannel,
+        ...supplyChannel,
+        custom: {
+          typeKey: "AddOns",
+          fields: [
+            {
+              name: "ReferenceItem",
+              value: `"${component.sku}"`,
+            },
+          ],
+        },
+      },
+    });
+  }
+  if (component.selectedWheel && component.selectedWheel != "") {
+    customType.custom.fields.push({
+      name: "SelectedWheel",
+      value: `"${component.selectedWheel}"`,
+    });
+    cartActions.push({
+      addLineItem: {
+        sku: component.selectedWheel,
+        quantity: Number(component.quantity),
+        ...distributionChannel,
+        ...supplyChannel,
+        custom: {
+          typeKey: "AddOns",
+          fields: [
+            {
+              name: "ReferenceItem",
+              value: `"${component.sku}"`,
+            },
+          ],
+        },
+      },
+    });
+  }
+  if (component.selectedInterior && component.selectedInterior != "") {
+    customType.custom.fields.push({
+      name: "SelectedInterior",
+      value: `"${component.selectedInterior}"`,
+    });
+    cartActions.push({
+      addLineItem: {
+        sku: component.selectedInterior,
+        quantity: Number(component.quantity),
+        ...distributionChannel,
+        ...supplyChannel,
+        custom: {
+          typeKey: "AddOns",
+          fields: [
+            {
+              name: "ReferenceItem",
+              value: `"${component.sku}"`,
+            },
+          ],
+        },
+      },
+    });
+  }
+  if (component.selectedAudio && component.selectedAudio != "") {
+    customType.custom.fields.push({
+      name: "SelectedAudio",
+      value: `"${component.selectedAudio}"`,
+    });
+    cartActions.push({
+      addLineItem: {
+        sku: component.selectedAudio,
+        quantity: Number(component.quantity),
+        ...distributionChannel,
+        ...supplyChannel,
+        custom: {
+          typeKey: "AddOns",
+          fields: [
+            {
+              name: "ReferenceItem",
+              value: `"${component.sku}"`,
+            },
+          ],
+        },
+      },
+    });
+  }
+  if (component.selectedAddOns && component.selectedAddOns != "") {
+    customType.custom.fields.push({
+      name: "SelectedAddOns",
+      value: `["${component.selectedAddOns}"]`,
+    });
+    for (var addOn in component.selectedAddOns) {
+      cartActions.push({
+        addLineItem: {
+          sku: component.selectedAddOns[addOn],
+          quantity: Number(component.quantity),
+          ...distributionChannel,
+          ...supplyChannel,
+          custom: {
+            typeKey: "AddOns",
+            fields: [
+              {
+                name: "ReferenceItem",
+                value: `"${component.sku}"`,
+              },
+            ],
+          },
+        },
+      });
+    }
+  }
+  return component.updateMyCart(cartActions);
+};
 export const productSlug = (component, lineItem) =>
   lineItem.productSlug?.[locale(component)] || lineItem.productSlug;
