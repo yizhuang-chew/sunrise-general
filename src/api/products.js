@@ -11,6 +11,9 @@ import config from "../../sunrise.config";
 import { locale } from "../components/common/shared";
 
 const asAttribute = (name, type, locale) => {
+  if (type === "ltext") {
+    return `variants.attributes.${name}.${locale}`;
+  }
   if (type === "lnum") {
     return `variants.attributes.${name}.label.${locale}`;
   }
