@@ -9,6 +9,7 @@ import ResetPassword from "../components/login/ResetPassword/ResetPassword.vue";
 import PageUserAccount from "../components/useraccount/PageUserAccount/PageUserAccount.vue";
 import PageNotFound from "../components/common/PageNotFound/PageNotFound.vue";
 import PageProductDetail from "../components/productdetail/PageProductDetail/PageProductDetail.vue";
+import CarProductDetail from "../components/cardetail/PageProductDetail/PageProductDetail.vue";
 import PageRentalProductDetail from "../components/rentalproductdetail/PageProductDetail/PageProductDetail.vue";
 import PageGiftProductDetail from "../components/giftproductdetail/PageProductDetail/PageProductDetail.vue";
 import PageGiftBundleDetail from "../components/giftbundledetail/PageProductDetail/PageProductDetail.vue";
@@ -150,6 +151,20 @@ export default [
         name: "product",
         components: {
           default: PageProductDetail,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+        props: {
+          default: true,
+          header: false,
+          footer: false,
+        },
+      },
+      {
+        path: "car/:productSlug/:sku",
+        name: "car",
+        components: {
+          default: CarProductDetail,
           header: TheHeader,
           footer: TheFooter,
         },
