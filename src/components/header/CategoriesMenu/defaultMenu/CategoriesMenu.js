@@ -98,15 +98,12 @@ export default {
       query: gql`
         query categories($locale: Locale!, $where:String!) {
           categories(
-            limit: 10
+            limit: 50
             where: $where
             sort: "orderHint asc"
           ) {
             results {
               ...MenuCategoryInfo
-              children {
-                ...MenuCategoryInfo
-              }
             }
           }
         }

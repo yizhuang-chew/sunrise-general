@@ -89,7 +89,6 @@
     </div>
     <div 
       class="Place-order mt-30"
-      v-if="paid"
     >
       <a
         @click.prevent="placeOrder"

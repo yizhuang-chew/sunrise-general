@@ -22,7 +22,7 @@
       </router-link>
 
       <ul
-        v-if="category1stLevel.children.length"
+        v-if="category1stLevel.children && category1stLevel.children.length"
         class="mega-menu"
         :class="category1stLevel.children.length === 2 ? 'menu-2-col mega-menu-width3' : 'mega-menu-width3'"
       >
