@@ -144,6 +144,7 @@ export default {
           return;
         }
       } catch (error) {
+         // eslint-disable-next-line no-console
         console.error(error);
         this.$emit("error", error);
       } finally {
@@ -178,6 +179,7 @@ export default {
      * @return {void}
      */
     focus() {
+       // eslint-disable-next-line no-console
       console.warn(
         "This method will currently not work on iOS 13+ due to a system limitation."
       );
