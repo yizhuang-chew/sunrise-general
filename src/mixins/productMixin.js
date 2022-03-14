@@ -24,9 +24,15 @@ export default {
           params: { productSlug, sku },
         };
       }
-      if(productType=="GiftCard"){
+      if(productType=="Gift_GiftCard"){
         return {
-          name: 'giftproduct',
+          name: 'giftcard',
+          params: { productSlug, sku },
+        };
+      }
+      if(productType=="Gift_GiftCardFixedValue"){
+        return {
+          name: 'giftcardfixed',
           params: { productSlug, sku },
         };
       }

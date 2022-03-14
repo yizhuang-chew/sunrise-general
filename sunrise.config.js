@@ -505,7 +505,9 @@ export default {
     // Beauty
     "Shade", 
     "Size", 
-    "Type"
+    "Type",
+    // Gift Card Fixed Value
+    "Amount",
   ],
   variantInProductName: ["size"],
   ...localConfig,
