@@ -22,6 +22,11 @@ export default {
     max() {
       return this.$route.query.max;
     },
+    facetWithoutExtras() {
+      return this.facets.filter(function(u) {
+        return u.terms && u.terms.length>0;
+      });
+    },
   },
   methods: {
     showFacetFilter(facet) {

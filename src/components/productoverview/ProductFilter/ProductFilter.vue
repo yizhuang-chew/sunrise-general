@@ -7,9 +7,8 @@
   <div class="product-filter-wrapper" style="display:block">
     <div class="row">
       <!-- Product Filter -->
-      <div v-for="facet in facets" v-bind:key="facet.label" class="custom-col-width-23 mb-20">
+      <div v-for="facet in facetWithoutExtras" v-bind:key="facet.label" class="custom-col-width-23 mb-20">
         <TermFilter
-          v-if="facet.terms && facet.terms.length>0"
           :name="facet.name"
           :label="facet.label"
           :component="facet.component"
