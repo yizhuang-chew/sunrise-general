@@ -24,6 +24,12 @@ export default {
       mainCategory: null,
     };
   },
+  mounted() {
+    let dialogFlowScript = document.createElement('script')
+    dialogFlowScript.setAttribute('src', 
+    'https://www.gstatic.com/dialogflow-console/fast/messenger-cx/bootstrap.js?v=1')
+    document.head.appendChild(dialogFlowScript)
+  },
   setup() {
     const { shoppingLists } = inject(SHOPPING_LIST);
     const totalShoppingCartItems = computed(() => {

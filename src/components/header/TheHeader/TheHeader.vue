@@ -15,11 +15,18 @@
                   data-test="stores-link"
                   v-if="showLocationChange"
                 >
-                  {{ $t('stores') }}
+                  {{ $t("stores") }}
                 </router-link>
-                <a href="#">{{$t('help')}}</a>
+                <a href="#">{{ $t("help") }}</a>
               </div>
             </div>
+            <df-messenger
+              df-cx="true"
+              location="australia-southeast1"
+              chat-title="Chatbot"
+              agent-id="d933a804-dea8-4096-b273-909c4875287a"
+              language-code="en"
+            ></df-messenger>
             <div class="col-sm-6 d-flex justify-content-end">
               <div class="curr-lang-wrap curr-lang-inc">
                 <ul>
@@ -60,8 +67,7 @@
                   <div
                     class="main-menu menu-lh-3 main-menu-blod main-menu-center"
                   >
-                    <CategoriesMenu 
-                      :mainCategory="mainCategory"/>
+                    <CategoriesMenu :mainCategory="mainCategory" />
                   </div>
                 </div>
                 <div class="col-xl-2 col-lg-3">
@@ -88,11 +94,11 @@
                       </a>
                     </div>
                     <div class="cart-wrap component-same ml-10">
-                      <router-link
-                        :to="{ name: 'shopping list' }"
-                      >
+                      <router-link :to="{ name: 'shopping list' }">
                         <i class="dl-icon-heart"></i>
-                        <span class="count-style">{{ totalShoppingCartItems }} </span>
+                        <span class="count-style"
+                          >{{ totalShoppingCartItems }}
+                        </span>
                       </router-link>
                     </div>
                   </div>
@@ -117,14 +123,14 @@
             <div class="mobile-header-right-wrap">
               <div class="same-style cart-wrap">
                 <a href="#" class="cart-active">
-                  <i class="dl-icon-cart1 "></i>
-                  <span class="count-style">{{totalCartItems}}</span>
+                  <i class="dl-icon-cart1"></i>
+                  <span class="count-style">{{ totalCartItems }}</span>
                 </a>
               </div>
               <div class="same-style cart-wrap">
                 <a href="#" class="cart-active">
-                  <i class="dl-icon-heart "></i>
-                  <span class="count-style">{{totalShoppingCartItems}}</span>
+                  <i class="dl-icon-heart"></i>
+                  <span class="count-style">{{ totalShoppingCartItems }}</span>
                 </a>
               </div>
               <div class="mobile-off-canvas">
