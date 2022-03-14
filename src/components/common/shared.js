@@ -166,7 +166,7 @@ const arrayToString = (value, locale) => {
   return Array.isArray(value)
     ? value
         .map(function(elem) {
-          return elem[locale];
+          return elem[locale] ? elem[locale] : elem;
         })
         .join(", ")
     : value;

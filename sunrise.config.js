@@ -99,7 +99,7 @@ export default {
     salesExternalId: "6",
   },
   facetSearches: [
-    // Beauty Start
+    // Fashion Start
     {
       name: "Brand",
       type: "text",
@@ -109,6 +109,26 @@ export default {
         en: "Brand",
       },
     },
+    {
+      name: "Size",
+      type: "text",
+      label: {
+        it: "Size",
+        zh: "Size",
+        en: "Size",
+      },
+    },
+    {
+      name: "Colour",
+      type: "text",
+      label: {
+        de: "Colour",
+        zh: "Colour",
+        en: "Colour",
+      },
+    },
+    // Fashion End
+    // Beauty Start
     {
       name: "SkinType",
       type: "ltext",
@@ -128,6 +148,64 @@ export default {
       },
     },
     // Beauty End
+    // Automotive Start
+    {
+      name: "FuelConsumption",
+      type: "text",
+      label: {
+        de: "Fuel Consumption",
+        it: "Fuel Consumption",
+        en: "Fuel Consumption",
+      },
+    },
+    {
+      name: "TopSpeed",
+      type: "text",
+      label: {
+        it: "Top Speed",
+        de: "Top Speed",
+        en: "Top Speed",
+      },
+    },
+    // Automotive End
+    // Grocery Start
+    {
+      name: "Varietal",
+      type: "text",
+      label: {
+        de: "Varietal",
+        it: "Varietal",
+        en: "Varietal",
+      },
+    },
+    {
+      name: "CountryOfOrigin",
+      type: "text",
+      label: {
+        it: "Country Of Origin",
+        de: "Country Of Origin",
+        en: "Country Of Origin",
+      },
+    },
+    {
+      name: "RegionOfOrigin",
+      type: "text",
+      label: {
+        it: "Region Of Origin",
+        de: "Region Of Origin",
+        en: "Region Of Origin",
+      },
+    },
+    // Grocery End
+    // Electronics Start
+    {
+      name: "BrandName",
+      label: {
+        it: "Brand",
+        de: "Brand",
+        en: "Brand",
+      },
+    },
     {
       name: "OperatingSystem",
       type: "text",
@@ -137,9 +215,48 @@ export default {
         en: "Operating System",
       },
     },
+    // Electronics End
+    // Food Start
+    {
+      name: "containsGluten",
+      type: "boolean",
+      label: {
+        it: "Contains Gluten",
+        de: "Contains Gluten",
+        en: "Contains Gluten",
+      },
+    },
+    {
+      name: "ContainsMilk",
+      type: "boolean",
+      label: {
+        it: "Contains Milk",
+        de: "Contains Milk",
+        en: "Contains Milk",
+      },
+    },
+    {
+      name: "containsEggs",
+      type: "boolean",
+      label: {
+        it: "Contains Eggs",
+        de: "Contains Eggs",
+        en: "Contains Eggs",
+      },
+    },
+    {
+      name: "containsWheat",
+      type: "boolean",
+      label: {
+        it: "Contains Wheat",
+        de: "Contains Wheat",
+        en: "Contains Wheat",
+      },
+    },
+    // Food End
   ],
   detailAttributes: [
-    //Beauty Start 
+    //Fashion Start
     {
       name:"Brand",
         label: {
@@ -148,6 +265,48 @@ export default {
           en: "Brand",
         },
     },
+    {
+      name:"ItemColourCode",
+        label: {
+          it: "Item Colour Code",
+          zh: "Item Colour Code",
+          en: "Item Colour Code",
+        },
+    },
+    {
+      name:"Style",
+        label: {
+          it: "Style",
+          zh: "Style",
+          en: "Style",
+        },
+    },
+    {
+      name:"Material",
+        label: {
+          it: "Material",
+          zh: "Material",
+          en: "Material",
+        },
+    },
+    {
+      name:"Manufacturer",
+        label: {
+          it: "Manufacturer",
+          zh: "Manufacturer",
+          en: "Manufacturer",
+        },
+    },
+    {
+      name:"ItemCode",
+        label: {
+          it: "Item Code",
+          zh: "Item Code",
+          en: "Item Code",
+        },
+    },
+    // Fashion End
+    //Beauty Start 
     {
       name:"Function",
         label: {
@@ -245,7 +404,245 @@ export default {
         en: "Details",
       },
     },
-    // Electronics
+    // Automotive Start
+    {
+      name:"Type",
+        label: {
+          it: "Type",
+          de: "Type",
+          en: "Type",
+        },
+    },
+    {
+      name:"FuelConsumption",
+        label: {
+          it: "Fuel Consumption",
+          de: "Fuel Consumption",
+          en: "Fuel Consumption",
+        },
+    },
+    {
+      name:"CO2Emission",
+      label: {
+        it: "CO2 Emission",
+        de: "CO2  Emission",
+        en: "CO2 Emission",
+      },
+    },
+    {
+      name:"VESBranding",
+      label: {
+        it: "VES Branding",
+        de: "VES Branding",
+        en: "VES Branding",
+      },
+    },
+    
+    {
+      name:"EngineType",
+      label: {
+        it: "Engine Type",
+        de: "Engine Type",
+        en: "Engine Type",
+      },
+    },
+    {
+      name:"DriveType",
+      label: {
+        it: "Drive Type",
+        de: "Drive Type",
+        en: "Drive Type",
+      },
+    },
+    {
+      name:"FuelType",
+      label: {
+        it: "Fuel Type",
+        de: "Fuel Type",
+        en: "Fuel Type",
+      },
+    },
+    {
+      name:"Dimensions",
+      label: {
+        it: "Dimensions",
+        de: "Dimensions",
+        en: "Dimensions",
+      },
+    },
+    {
+      name:"TractionControl",
+      label: {
+        it: "Traction Control",
+        de: "Traction Control",
+        en: "Traction Control",
+      },
+    },
+    {
+      name:"Multi-FunctionSteeringWheel",
+      label: {
+        it: "Multi-Function steering wheel",
+        de: "Multi-Function steering wheel",
+        en: "Multi-Function steering wheel",
+      },
+    },
+    {
+      name:"KeylessEngineStart",
+      label: {
+        it: "Keyless Engine Start",
+        de: "Keyless Engine Start",
+        en: "Keyless Engine Start",
+      },
+    },
+    {
+      name:"AutoHeadlights",
+      label: {
+        it: "Auto Headlights",
+        de: "Auto Headlights",
+        en: "Auto Headlights",
+      },
+    },
+    {
+      name:"RainSensingWipers",
+      label: {
+        it: "Rain sensing wipers",
+        de: "Rain sensing wipers",
+        en: "Rain sensing wipers",
+      },
+    },
+    {
+      name:"NavigationSystem",
+      label: {
+        it: "Navigation System",
+        de: "Navigation System",
+        en: "Navigation System",
+      },
+    },
+    {
+      name:"ElectricTailgate",
+      label: {
+        it: "Electric Tailgate",
+        de: "Electric Tailgate",
+        en: "Electric Tailgate",
+      },
+    },
+    {
+      name:"ElectricSeat",
+      label: {
+        it: "Electric Seat",
+        de: "Electric Seat",
+        en: "Electric Seat",
+      },
+    },
+    {
+      name:"MemorySeat",
+      label: {
+        it: "Memory Seat",
+        de: "Memory Seat",
+        en: "Memory Seat",
+      },
+    },
+
+    {
+      name:"Features",
+      label: {
+        it: "Additional Features",
+        de: "Additional Features",
+        en: "Additional Features",
+      },
+    },
+    {
+      name:"Includes",
+      label: {
+        it: "Includes",
+        de: "Includes",
+        en: "Includes",
+      },
+    },
+    // Automotive End
+    // Grocery Start
+    {
+      name:"Packaging",
+        label: {
+          it: "Packaging",
+          de: "Packaging",
+          en: "Packaging",
+        },
+    },
+    {
+      name:"Varietal",
+        label: {
+          it: "Varietal",
+          de: "Varietal",
+          en: "Varietal",
+        },
+    },
+    {
+      name:"LiquorStyle",
+      label: {
+        it: "Liquor Style",
+        de: "Liquor Style",
+        en: "Liquor Style",
+      },
+    },
+    {
+      name:"RegionOfOrigin",
+      label: {
+        it: "Region Of Origin",
+        de: "Region Of Origin",
+        en: "Region Of Origin",
+      },
+    },
+    {
+      name:"CountryOfOrigin",
+      label: {
+        it: "Country Of Origin",
+        de: "Country Of Origin",
+        en: "Country Of Origin",
+      },
+    },
+    {
+      name:"Vintage",
+      label: {
+        it: "Vintage",
+        de: "Vintage",
+        en: "Vintage",
+      },
+    },
+    {
+      name:"Alcohol",
+      label: {
+        it: "Alcohol %",
+        de: "Alcohol %",
+        en: "Alcohol %",
+      },
+    },
+    {
+      name:"Ingredients",
+        label: {
+          it: "Ingredients",
+          de: "Ingredients",
+          en: "Ingredients",
+        },
+    },
+    {
+      name:"Directions",
+        label: {
+          it: "Directions",
+          de: "Directions",
+          en: "Directions",
+        },
+    },
+    {
+      name:"ProductWarnings",
+        label: {
+          it: "Product Warnings",
+          de: "Product Warnings",
+          en: "Product Warnings",
+        },
+    },
+    // Grocery End
+    // Electronics Start
     {
       name: "BrandName",
       label: {
@@ -374,7 +771,129 @@ export default {
         en: "Operating System",
       },
     },
-    // Electronics end
+    // Electronics End
+    // Food Start
+    {
+      name: "containsGluten",
+      label: {
+        it: "Contains Gluten",
+        de: "Contains Gluten",
+        en: "Contains Gluten",
+      },
+    },
+    {
+      name: "ContainsMilk",
+      label: {
+        it: "Contains Milk",
+        de: "Contains Milk",
+        en: "Contains Milk",
+      },
+    },
+    {
+      name: "containsEggs",
+      label: {
+        it: "Contains Eggs",
+        de: "Contains Eggs",
+        en: "Contains Eggs",
+      },
+    },
+    {
+      name: "containsWheat",
+      label: {
+        it: "Contains Wheat",
+        de: "Contains Wheat",
+        en: "Contains Wheat",
+      },
+    },
+    {
+      name: "serveSize",
+      label: {
+        it: "Serve Size",
+        de: "Serve Size",
+        en: "Serve Size",
+      },
+    },
+    {
+      name: "calories",
+      label: {
+        it: "Calories (kcal)",
+        de: "Calories (kcal)",
+        en: "Calories (kcal)",
+      },
+    },
+    {
+      name: "energy",
+      label: {
+        it: "Energy (kj)",
+        de: "Energy (kj)",
+        en: "Energy (kj)",
+      },
+    },
+    {
+      name: "nutritionalInfo",
+      label: {
+        it: "Nutritional Info",
+        de: "Nutritional Info",
+        en: "Nutritional Info",
+      },
+    },
+    {
+      name: "protein",
+      label: {
+        it: "Protein",
+        de: "Protein",
+        en: "Protein",
+      },
+    },
+    {
+      name: "fatTotal",
+      label: {
+        it: "Fat Total (g)",
+        de: "Fat Total (g)",
+        en: "Fat Total (g)",
+      },
+    },
+    {
+      name: "fatSaturated",
+      label: {
+        it: "Fat Saturated (g)",
+        de: "Fat Saturated (g)",
+        en: "Fat Saturated (g)",
+      },
+    },
+    {
+      name: "carbohydrate",
+      label: {
+        it: "Carbohydrate (g)",
+        de: "Carbohydrate (g)",
+        en: "Carbohydrate (g)",
+      },
+    },
+    {
+      name: "sugars",
+      label: {
+        it: "Sugars (g)",
+        de: "Sugars (g)",
+        en: "Sugars (g)",
+      },
+    },
+    {
+      name: "sodium",
+      label: {
+        it: "Sodium",
+        de: "Sodium",
+        en: "Sodium",
+      },
+    },
+    {
+      name: "defaultToppings",
+      label: {
+        it: "Default Toppings",
+        de: "Default Toppings",
+        en: "Default Toppings",
+      },
+    },
+    // Food End
     {
       name: "designer",
       label: {
@@ -424,14 +943,6 @@ export default {
       },
     },
     //Start
-    {
-      name: "Brand",
-      label: {
-        it: "Brand",
-        de: "Brand",
-        en: "Brand",
-      },
-    },
     {
       name: "OperatingSystem",
       label: {
@@ -492,8 +1003,6 @@ export default {
   variantSelector: [
     "GiftBox",
     "Colour",
-    "Capacity",
-    "Selection",
     "SubscriptionPeriod",
     "Trainer",
     "SecondaryColour",
@@ -508,6 +1017,18 @@ export default {
     "Type",
     // Gift Card Fixed Value
     "Amount",
+    // Automotive
+    "Type", 
+    "Size", 
+    "CarModel",
+    // Grocery
+    "Packaging",
+    // Electronics
+    "Selection",
+    "Capacity",
+    // Food
+    "Size",
+    "PizzaSize",
   ],
   variantInProductName: ["size"],
   ...localConfig,
