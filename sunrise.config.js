@@ -45,6 +45,7 @@ export default {
     DE: "Deutschland",
     US: "United States",
     SG: "Singapore",
+    PH: "Phillippines",
   },
   logo:
     "https://images.ctfassets.net/l89vlt8ragrr/" +
@@ -77,7 +78,15 @@ export default {
           currency: "SGD",
         },
       },
+      PH: {
+        currency: {
+          style: "currency",
+          currency: "PHP",
+          currencyDisplay: "symbol",
+        },
+      },
     },
+    
     datetime: {
       US: {
         short: {
@@ -997,6 +1006,63 @@ export default {
         it: "Credit Tier",
         de: "Credit Tier",
         en: "Credit Tier",
+      },
+    },
+    // Books
+    {
+      name: "Author",
+      label: {
+        it: "Author",
+        de: "Author",
+        en: "Author",
+      },
+    },
+    {
+      name: "PUBLISHER",
+      label: {
+        it: "Publisher",
+        de: "Publisher",
+        en: "Publisher",
+      },
+    },
+    {
+      name: "Weight",
+      label: {
+        it: "Weight",
+        de: "Weight",
+        en: "Weight",
+      },
+    },
+    {
+      name: "Height",
+      label: {
+        it: "Height",
+        de: "Height",
+        en: "Height",
+      },
+    },
+    {
+      name: "Thickness",
+      label: {
+        it: "Thickness",
+        de: "Thickness",
+        en: "Thickness",
+      },
+    },
+    {
+      name: "Width",
+      label: {
+        it: "Width",
+        de: "Width",
+        en: "Width",
+      },
+    },
+    {
+      name: "SUPPLIER",
+      label: {
+        it: "Supplier",
+        de: "Supplier",
+        en: "Supplier",
       },
     },
   ],

@@ -104,6 +104,9 @@ export default {
           ) {
             results {
               ...MenuCategoryInfo
+              children {
+                ...MenuCategoryInfo
+              }
             }
           }
         }
