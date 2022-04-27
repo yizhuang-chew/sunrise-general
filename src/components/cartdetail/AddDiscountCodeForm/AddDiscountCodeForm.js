@@ -1,4 +1,4 @@
-import { required } from 'vuelidate/lib/validators';
+// import { required } from 'vuelidate/lib/validators';
 import cartMixin from '@/mixins/cartMixin';
 import LoadingButton from '../../common/form/LoadingButton/LoadingButton.vue';
 import ServerError from '../../common/form/ServerError/ServerError.vue';
@@ -37,7 +37,7 @@ export default {
   mixins: [cartMixin],
   validations: {
     form: {
-      code: { required },
+      // code: { required },
     },
   },
 };

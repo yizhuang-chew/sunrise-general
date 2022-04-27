@@ -16,9 +16,9 @@
       <b>
         {{ discountInfo.code }}
       </b>
-      <span v-if="discountInfo.name">
+      <!--<span v-if="discountInfo.name">
         ({{ discountInfo.name }})</span
-      >
+      >-->
       <span>
         <RemoveDiscountCodeForm
           v-if="editable"
