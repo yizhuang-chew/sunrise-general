@@ -172,7 +172,7 @@ const products = {
     const { min, max } = route.query;
     const priceFilter = {};
     const minQ = min ? min * 100 : "0";
-    const maxQ = max ? max * 100 : "100000000";
+    const maxQ = max ? max * 100 : "10000000000";
     priceFilter.priceFilter = `variants.scopedPrice.value.centAmount: range (${minQ} to ${maxQ})`;
     return {
       category,
