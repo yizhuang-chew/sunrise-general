@@ -1082,6 +1082,15 @@ export default {
         en: "Washing Instructions",
       },
     },
+
+    {
+      name: "Collection",
+      label: {
+        it: "Collection",
+        de: "Collection",
+        en: "Collection",
+      },
+    },
   ],
   variantSelector: [
     "GiftBox",
