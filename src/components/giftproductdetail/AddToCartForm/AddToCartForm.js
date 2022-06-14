@@ -51,6 +51,9 @@ export default {
     hasStockInfo() {
       return typeof this.availableQuantity !== 'undefined';
     },
+    currency() {
+      return this.$store.state.currency;
+    },
   },
   methods: {
     async addLineItem() {

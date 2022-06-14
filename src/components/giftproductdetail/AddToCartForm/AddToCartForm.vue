@@ -7,7 +7,7 @@
     <form v-if="isOnStock" ref="form" v-on:submit.prevent="addLineItem">
       <span class="field-label-text marginSpace" data-test="form-label-text">Enter Amount:</span>
         <br/>
-        <input class="textInput marginSpace" type="number" v-model="giftCardAmount" />
+        {{currency}} <input class="textInput marginSpace" type="number" v-model="giftCardAmount" />
         <br/>
         <span class="field-label-text marginSpace" data-test="form-label-text">Delivery Date</span>
         <br/>

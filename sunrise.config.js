@@ -39,6 +39,7 @@ export default {
   languages: {
     en: "English",
     de: "Deutsch",
+    hi: "Hindi",
   },
   countries: {
     AU: "Australia",
@@ -46,6 +47,7 @@ export default {
     US: "United States",
     SG: "Singapore",
     PH: "Phillippines",
+    IN: "India",
   },
   logo:
     "https://images.ctfassets.net/l89vlt8ragrr/" +
@@ -85,6 +87,13 @@ export default {
           currencyDisplay: "symbol",
         },
       },
+      IN: {
+        currency: {
+          style: "currency",
+          currency: "INR",
+          currencyDisplay: "symbol",
+        },
+      }
     },
     
     datetime: {
