@@ -1074,6 +1074,14 @@ export default {
         en: "Supplier",
       },
     },
+    {
+      name: "WashingInstructions",
+      label: {
+        it: "Washing Instructions",
+        de: "Washing Instructions",
+        en: "Washing Instructions",
+      },
+    },
   ],
   variantSelector: [
     "GiftBox",
