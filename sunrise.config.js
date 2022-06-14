@@ -90,7 +90,7 @@ export default {
       IN: {
         currency: {
           style: "currency",
-          currency: "INR",
+          currency: "IDR",
           currencyDisplay: "symbol",
         },
       }
