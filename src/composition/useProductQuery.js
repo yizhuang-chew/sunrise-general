@@ -69,7 +69,7 @@ export default (props,ctx,sku=ref(null),id,variantId) => {
         const p = id ? response : response.results[0]
         const name = p?.name[locale.value]
         const slug = p?.slug[locale.value]
-        const productType=p?.productType?.obj.key;
+        const productType=p?.productType;
         const description = p?.description? p?.description[locale.value] : '';
 
         const allVariants = p.variants.concat(p.masterVariant).map(
