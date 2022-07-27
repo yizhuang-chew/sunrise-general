@@ -35,7 +35,7 @@
                         @click="() => removeItem(lineItem.id)"
                         class="edit-delete-section"
                       >
-                        <i class="fa fa-trash-o"></i>
+                        <i class="fa fa-trash-o"><span class="shopping-list-remove"> Remove</span></i>
                       </a>
                     </div>
                     <div class="shopping-list-add-div">
