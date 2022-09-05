@@ -14,6 +14,7 @@ import PageRentalProductDetail from "../components/rentalproductdetail/PageProdu
 import PageGiftProductDetail from "../components/giftproductdetail/PageProductDetail/PageProductDetail.vue";
 import PageGiftBundleDetail from "../components/giftbundledetail/PageProductDetail/PageProductDetail.vue";
 import PagePizzaDetail from "../components/pizzaproductdetail/PageProductDetail/PageProductDetail.vue";
+import CustomDetail from "../components/customdetail/PageProductDetail/PageProductDetail.vue";
 import PageGiftCardFixedDetail from "../components/giftcardfixeddetail/PageProductDetail/PageProductDetail.vue";
 import HalfPizzaDetail from "../components/halfpizzaproductdetail/PageProductDetail/PageProductDetail.vue";
 import PageShoppingList from "../components/cartdetail/PageShoppingList/PageShoppingList.vue";
@@ -265,6 +266,20 @@ export default [
         name: "bundle",
         components: {
           default: BundleDealDetail,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+        props: {
+          default: true,
+          header: false,
+          footer: false,
+        },
+      },
+      {
+        path: "custom",
+        name: "custom",
+        components: {
+          default: CustomDetail,
           header: TheHeader,
           footer: TheFooter,
         },

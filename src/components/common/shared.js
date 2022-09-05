@@ -270,6 +270,63 @@ export const addLine = async (component) => {
   }
   return component.updateMyCart(cartActions);
 };
+export const addCustomLine = async (component) => {
+  var cartActions = [];
+
+  let itemCustomType = component.appointmentDateInput
+    ? {
+        custom: {
+          typeKey: "AppointmentItem",
+          fields: [
+            {
+              name: "AppointmentDate",
+              value: `"${component.appointmentDateInput}"`,
+            },
+          ],
+        },
+      }
+    : {};
+
+  if (Object.keys(itemCustomType).length === 0) {
+    itemCustomType = component.subscriptionInput
+      ? {
+          custom: {
+            typeKey: "SubscriptionItem",
+            fields: [
+              {
+                name: "SubscriptionDuration",
+                value: `"${component.subscriptionInput}"`,
+              },
+            ],
+          },
+        }
+      : {};
+  }
+
+  if (!component.cartExists) {
+    await component.createMyCart({
+      currency: component.$store.state.currency,
+      country: component.$store.state.country,
+      shippingAddress: { country: component.$store.state.country },
+    });
+  }
+  cartActions.push({
+    addCustomLineItem: {
+      slug: component.sku,
+      name: { locale: "en", value: component.sku },
+      quantity: Number(component.quantity),
+      taxCategory: { key: "Standard" },
+      money: {
+        centPrecision: {
+          centAmount: component.money.centAmount,
+          currencyCode: component.money.currency,
+        },
+      },
+    },
+  });
+
+  return component.updateCart(cartActions);
+};
 export const addGiftBundleLine = async (component) => {
   var cartActions = [];
 

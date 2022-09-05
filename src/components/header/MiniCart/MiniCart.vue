@@ -60,6 +60,39 @@
                 </div>
                 <LineItemDeleteForm :lineItemId="lineItem.id" />
               </li>
+              <li
+                v-for="customLineItem in sortedCustomLineItems"
+                :key="customLineItem.id"
+                data-test="mini-cart-line-item"
+                class="single-product-cart"
+              >
+               <div class="cart-img">
+                  <router-link
+                    to="custom"
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+                      :alt="customLineItem.name.en"
+                    />
+                  </router-link>
+                </div>
+                <div class="cart-title">
+                  <h4>
+                    <router-link
+                      to="custom"
+                      data-test="cart-line-item-link"
+                    >
+                      {{ customLineItem.name.en }}
+                    </router-link>
+                  </h4>
+                  <span
+                    data-test="cart-line-item-quantity"
+                  >
+                    {{ customLineItem.quantity }} ×
+                    <BasePrice :price="{value:customLineItem.totalPrice}"
+                  /></span>
+                </div>
+              </li>
             </ul>
             <div class="cart-total">
               <h4>

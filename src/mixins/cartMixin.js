@@ -21,19 +21,26 @@ export default {
     },
 
     cartNotEmpty() {
-      return this.me?.activeCart?.lineItems.length > 0;
+      return this.me?.activeCart?.lineItems.length > 0 || this.me?.activeCart?.customLineItems.length > 0;
     },
 
     totalItems() {
       if (cartExists(this)) {
-        return this.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0);
+        let lineItemsCount = this.me.activeCart.lineItems.reduce((acc, li) => acc + li.quantity, 0);
+        let customLineItemsCount = this.me.activeCart.customLineItems.reduce((acc, li) => acc + li.quantity, 0);
+        return lineItemsCount+customLineItemsCount;
       }
       return 0;
     },
-
     sortedLineItems() {
       if (cartExists(this)) {
         return [...this.me.activeCart.lineItems].reverse();
+      }
+      return [];
+    },
+    sortedCustomLineItems() {
+      if (cartExists(this)) {
+        return [...this.me.activeCart.customLineItems].reverse();
       }
       return [];
     },

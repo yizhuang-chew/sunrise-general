@@ -26,6 +26,16 @@
         @unselect-return-item="unselectReturnItem"
         data-test="cart-line-item"
       />
+      <CustomLineItemInfo
+        :editable="editable"
+        :selectable="selectable"
+        v-for="customLineItem in cartLike.customLineItems"
+        :key="customLineItem.id"
+        :lineItem="customLineItem"
+        @select-return-item="selectReturnItem"
+        @unselect-return-item="unselectReturnItem"
+        data-test="cart-line-item"
+      />
     </table>
   </div>
 </template>

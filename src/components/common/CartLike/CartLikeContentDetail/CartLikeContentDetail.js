@@ -2,6 +2,7 @@ import BasePrice from '../../BasePrice/BasePrice.vue';
 import LineItemQuantityForm from '../../../cartdetail/LineItemQuantityForm/LineItemQuantityForm.vue';
 import LineItemDeleteForm from '../../../cartdetail/LineItemDeleteForm/LineItemDeleteForm.vue';
 import LineItemInfo from '../LineItemInfo/LineItemInfo.vue';
+import CustomLineItemInfo from '../CustomLineItemInfo/CustomLineItemInfo.vue';
 import { totalPrice } from '../../shared';
 
 export default {
@@ -10,6 +11,7 @@ export default {
     LineItemQuantityForm,
     BasePrice,
     LineItemInfo,
+    CustomLineItemInfo,
   },
   props: {
     cartLike: {

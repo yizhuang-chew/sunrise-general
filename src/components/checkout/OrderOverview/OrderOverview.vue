@@ -31,6 +31,21 @@
               <span><BasePrice :price="totalPrice(lineItem)"/></span>
             </div>
           </div>
+          <div
+            v-for="customLineItem in sortedCustomLineItems"
+            :key="customLineItem.id"
+            class="single-order-middle"
+          >
+            <div class="single-order-content">
+              <h5>
+                {{ customLineItem.name.en }}
+                <span>× {{ customLineItem.quantity }}</span>
+              </h5>
+            </div>
+            <div class="single-order-price">
+              <span><BasePrice :price="{value:customLineItem.totalPrice}"/></span>
+            </div>
+          </div>
         </div>
         <div class="your-order-info order-subtotal">
           <ul>
