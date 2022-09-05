@@ -17,6 +17,7 @@ import PagePizzaDetail from "../components/pizzaproductdetail/PageProductDetail/
 import PageGiftCardFixedDetail from "../components/giftcardfixeddetail/PageProductDetail/PageProductDetail.vue";
 import HalfPizzaDetail from "../components/halfpizzaproductdetail/PageProductDetail/PageProductDetail.vue";
 import PageShoppingList from "../components/cartdetail/PageShoppingList/PageShoppingList.vue";
+import BundleDealDetail from "../components/bundledealdetail/PageProductDetail/PageProductDetail.vue";
 import ListDetail from "../components/cartdetail/PageShoppingList/ListDetail/ListDetail.vue";
 import PageCartDetail from "../components/cartdetail/PageCartDetail/PageCartDetail.vue";
 import PageStoreLocator from "../components/stores/PageStoreLocator/PageStoreLocator.vue";
@@ -250,6 +251,20 @@ export default [
         name: "halfpizza",
         components: {
           default: HalfPizzaDetail,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+        props: {
+          default: true,
+          header: false,
+          footer: false,
+        },
+      },
+      {
+        path: "bundle/:productSlug/:sku",
+        name: "bundle",
+        components: {
+          default: BundleDealDetail,
           header: TheHeader,
           footer: TheFooter,
         },

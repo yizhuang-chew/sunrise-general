@@ -1,6 +1,7 @@
 import cartMixin from '../../../mixins/cartMixin';
-import { addLine } from '../../common/shared';
+import { addBundleDealLine,addBundleIndividualLine } from '../../common/shared';
 import VueSelectImage from 'vue-select-image';
+import BundleItem from '../BundleItem/BundleItem.vue';
 import gql from 'graphql-tag';
 // import ServerError from '../../common/form/ServerError/index.vue';
 // import LoadingButton from '../../common/form/LoadingButton/index.vue';
@@ -12,7 +13,7 @@ export const createCartVariables = (component) => ({
   shippingAddress: { country: component.$store.state.country },
 });
 export default {
-  components: { VueSelectImage },
+  components: { VueSelectImage, BundleItem },
   props: {
     sku: {
       type: String,
@@ -22,11 +23,7 @@ export default {
       type: Boolean,
       required: true,
     },
-    appointmentDate:{
-      type: Boolean,
-      required: false,
-    },
-    subscription:{
+    appointmentDate: {
       type: Boolean,
       required: false,
     },
@@ -35,15 +32,19 @@ export default {
       required: false,
     },
     onAdd: {
-      type: Function|Boolean,
-      required:false
+      type: Function | Boolean,
+      required: false
     },
     addCaption: {
-      type:String,
-      default:"addToCart"
+      type: String,
+      default: "addToCart"
     },
     addOns: {
-      type:Array,
+      type: Array,
+      required: false,
+    },
+    bundleItems: {
+      type: Array,
       required: false,
     },
   },
@@ -54,7 +55,7 @@ export default {
     addOnOptions: null,
     selectedAddOns: null,
     appointmentDateInput: null,
-    subscriptionInput: null,
+    selectedBundleItems: [],
   }),
   computed: {
     isLoading() {
@@ -65,15 +66,21 @@ export default {
     },
   },
   methods: {
-    onSelectMultipleGifts(data){
+    onSelectMultipleGifts(data) {
       this.selectedAddOns = [];
-      for(var selected in data){
+      for (var selected in data) {
         this.selectedAddOns.push(data[selected].id)
       }
     },
-    async addLineItem() {
-      if(this.onAdd){
-        this.onAdd(this.sku,this.quantity)
+    updateBundleItem({ selectedSku, index }) {
+      if (this.selectedBundleItems.length == 0) {
+        this.selectedBundleItems = new Array(this.bundleItems.length);
+      }
+      this.selectedBundleItems[index] = selectedSku;
+    },
+    async addLineItem(e) {
+      if (this.onAdd) {
+        this.onAdd(this.sku, this.quantity)
         return
       }
       if (!this.isOnStock) {
@@ -86,22 +93,30 @@ export default {
       //  if stock info is not available then ignore stock errors
       if (this.quantity <= this.availableQuantity || this.hasStockInfo === false) {
         this.showQuantityError = false;
-        return addLine(this)
-          .then(() => this.$emit('product-added'))
-          .then(() => this.$store.dispatch('openMiniCart'));
+
+        if (e.submitter.value == 'Add (Priced as Bundle)') {
+          return addBundleDealLine(this)
+            .then(() => this.$emit('product-added'))
+            .then(() => this.$store.dispatch('openMiniCart'));
+        }
+        else {
+          return addBundleIndividualLine(this)
+            .then(() => this.$emit('product-added'))
+            .then(() => this.$store.dispatch('openMiniCart'));
+        }
       } else {
         this.showQuantityError = true;
       }
     },
   },
   watch: {
-    addOnProducts(){
+    addOnProducts() {
       this.addOnOptions = [];
       for (var productIndex in this.addOnProducts.results) {
         var product = this.addOnProducts.results[productIndex]
         for (var variant in product.masterData.current.allVariants) {
           var variantItem = product.masterData.current.allVariants[variant]
-          if(this.addOns.includes(variantItem.sku)){
+          if (this.addOns.includes(variantItem.sku)) {
             var price = variantItem.price.value.centAmount;
             if (price == 0) {
               price = 'Free'

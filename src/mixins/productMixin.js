@@ -60,6 +60,12 @@ export default {
           params: { productSlug, sku },
         };
       }
+      if(productType=="Bundle"){
+        return {
+          name: 'bundle',
+          params: { productSlug, sku },
+        };
+      }
       return {
         name: 'product',
         params: { productSlug, sku },

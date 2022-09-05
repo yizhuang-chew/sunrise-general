@@ -1,0 +1,82 @@
+
+.deal .vue-select-image__wrapper {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  
+  overflow: auto;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+}
+
+.deal .vue-select-image__item {
+  margin: 0px 5px 5px 0px;
+  display: table-cell;
+}
+
+.vue-select-image__thumbnail{
+  cursor: pointer;
+  padding: 6px;
+  border: 1px solid #dddddd;
+
+  display: block;
+  padding: 4px;
+  line-height: 20px;
+  border: 1px solid #ddd;
+
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.vue-select-image__thumbnail--selected{
+  background: #0088cc;
+}
+
+.vue-select-image__thumbnail--disabled{
+  background: #b9b9b9;
+  cursor: not-allowed;
+}
+
+.vue-select-image__thumbnail--disabled > .vue-select-image__img{
+  opacity: .5;
+}
+
+.deal .vue-select-image__img{
+  -webkit-user-drag: none;
+  display: block;
+  max-width: 100%;
+  max-width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.deal .vue-select-image__lbl{
+  line-height: 3;
+  font-size: x-small;
+}
+
+@media only screen and (min-width: 1200px) {
+  .deal .vue-select-image__item {
+    margin-left: 5px;
+  }
+}
+.vue-select-image__lbl{
+  text-align: center;
+  width: 100%;
+}
+.dateInput{
+  background: white;
+}

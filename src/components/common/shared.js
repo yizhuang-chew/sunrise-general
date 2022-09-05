@@ -198,6 +198,22 @@ export const addLine = async (component) => {
       }
     : {};
 
+  if (Object.keys(itemCustomType).length === 0) {
+    itemCustomType = component.subscriptionInput
+      ? {
+          custom: {
+            typeKey: "SubscriptionItem",
+            fields: [
+              {
+                name: "SubscriptionDuration",
+                value: `"${component.subscriptionInput}"`,
+              },
+            ],
+          },
+        }
+      : {};
+  }
+
   if (!component.cartExists) {
     await component.createMyCart({
       currency: component.$store.state.currency,
@@ -299,19 +315,17 @@ export const addGiftBundleLine = async (component) => {
     },
   });
 
-  if(component.appointmentDateInput  && component.appointmentDateInput != ""){
-   customType.custom.fields.push({
-              name: "DeliveryDate",
-              value: `"${component.appointmentDateInput}"`
-      });
+  if (component.appointmentDateInput && component.appointmentDateInput != "") {
+    customType.custom.fields.push({
+      name: "DeliveryDate",
+      value: `"${component.appointmentDateInput}"`,
+    });
   }
-  if (component.selectedJar && component.selectedJar != '') {
-    customType.custom.fields.push(
-      {
-        name: 'SelectedJar',
-        value: `"${component.selectedJar}"`,
-      }
-    )
+  if (component.selectedJar && component.selectedJar != "") {
+    customType.custom.fields.push({
+      name: "SelectedJar",
+      value: `"${component.selectedJar}"`,
+    });
     cartActions.push({
       addLineItem: {
         sku: component.selectedJar,
@@ -319,33 +333,29 @@ export const addGiftBundleLine = async (component) => {
         ...distributionChannel,
         ...supplyChannel,
         custom: {
-          typeKey: 'AddOns',
+          typeKey: "AddOns",
           fields: [
             {
-              name: 'ReferenceItem',
+              name: "ReferenceItem",
               value: `"${component.sku}"`,
-            }
-          ]
-        }
+            },
+          ],
+        },
       },
-    })
-    if (component.jarMessage && component.jarMessage != '') {
-      customType.custom.fields.push(
-        {
-          name: 'JarMessage',
-          value: `"${component.jarMessage}"`,
-        }
-      )
+    });
+    if (component.jarMessage && component.jarMessage != "") {
+      customType.custom.fields.push({
+        name: "JarMessage",
+        value: `"${component.jarMessage}"`,
+      });
     }
   }
 
-  if (component.selectedCard && component.selectedCard != '') {
-    customType.custom.fields.push(
-      {
-        name: 'SelectedCard',
-        value: `"${component.selectedCard}"`,
-      }
-    )
+  if (component.selectedCard && component.selectedCard != "") {
+    customType.custom.fields.push({
+      name: "SelectedCard",
+      value: `"${component.selectedCard}"`,
+    });
     cartActions.push({
       addLineItem: {
         sku: component.selectedCard,
@@ -353,49 +363,41 @@ export const addGiftBundleLine = async (component) => {
         ...distributionChannel,
         ...supplyChannel,
         custom: {
-          typeKey: 'AddOns',
+          typeKey: "AddOns",
           fields: [
             {
-              name: 'ReferenceItem',
+              name: "ReferenceItem",
               value: `"${component.sku}"`,
-            }
-          ]
-        }
+            },
+          ],
+        },
       },
-    })
-    if (component.to && component.to != '') {
-      customType.custom.fields.push(
-        {
-          name: 'To',
-          value: `"${component.to}"`,
-        }
-      )
+    });
+    if (component.to && component.to != "") {
+      customType.custom.fields.push({
+        name: "To",
+        value: `"${component.to}"`,
+      });
     }
-    if (component.message && component.message != '') {
-      customType.custom.fields.push(
-        {
-          name: 'Message',
-          value: `"${component.message}"`,
-        }
-      )
+    if (component.message && component.message != "") {
+      customType.custom.fields.push({
+        name: "Message",
+        value: `"${component.message}"`,
+      });
     }
-    if (component.from && component.from != '') {
-      customType.custom.fields.push(
-        {
-          name: 'From',
-          value: `"${component.from}"`,
-        }
-      )
+    if (component.from && component.from != "") {
+      customType.custom.fields.push({
+        name: "From",
+        value: `"${component.from}"`,
+      });
     }
   }
 
   if (component.selectedAddOns && component.selectedAddOns != "") {
-    customType.custom.fields.push(
-      {
-        name: 'SelectedAddOns',
-        value: `["${component.selectedAddOns}"]`,
-      }
-    )
+    customType.custom.fields.push({
+      name: "SelectedAddOns",
+      value: `["${component.selectedAddOns}"]`,
+    });
     for (var addOn in component.selectedAddOns) {
       cartActions.push({
         addLineItem: {

@@ -5,20 +5,6 @@
 <template>
   <div>
     <div class="product-dec-action-wrap pro-dec-action-2">
-      <div v-if="subscription" class="pro-details-size">
-        <label class="field-label">
-          <span class="field-label-text" data-test="form-label-text"
-            >Recurring Period</span
-          >
-          <select v-model="subscriptionInput" class="select">
-            <option value="Every Week">Every Week</option>
-            <option value="Every 2 Weeks">Every 2 Weeks</option>
-            <option value="Every Month">Every Month</option>
-            <option value="Every 2 Months">Every 2 Months</option>
-            <option value="Every 6 Months">Every 6 Months</option>
-          </select>
-        </label>
-      </div>
       <div v-if="appointmentDate" class="pro-details-size">
         <label class="field-label">
           <span class="field-label-text" data-test="form-label-text"
@@ -26,6 +12,15 @@
           >
           <input class="dateInput" type="date" v-model="appointmentDateInput" />
         </label>
+      </div>
+      <div v-if="bundleItems && bundleItems.length" class="pro-details-size">
+        <BundleItem
+          v-for="(bundleItem, index) in bundleItems"
+          :key="index"
+          :bundleItem="bundleItem"
+          :index="index"
+          @bundle-item-updated="updateBundleItem"
+        />
       </div>
       <div v-if="addOnOptions && addOnOptions.length" class="pro-details-size">
         <span style="margin-left: 3px">Add Ons</span>
@@ -39,7 +34,7 @@
       </div>
     </div>
     <div class="product-dec-action-wrap pro-dec-action-2">
-      <form v-if="isOnStock" ref="form" v-on:submit.prevent="addLineItem">
+      <form v-if="isOnStock" ref="form" @click="addLineItem($event)" v-on:submit.prevent="addLineItem">
         <div class="quality-cart-wrap">
           <div class="quality-wrap">
             <input
@@ -64,7 +59,21 @@
             <input
               data-test="add-to-cart-button"
               type="submit"
-              :value="$t(addCaption)"
+              value="Add (Priced as Bundle)"
+            />
+          </div>
+          <div class="quality-wrap">
+            <!-- <a
+            href="#" 
+            @click.prevent="submitForm"
+            data-test="add-to-cart-button"
+          >
+            {{$t('addToCart')}}
+          </a> -->
+            <input
+              data-test="add-to-cart-button"
+              type="submit"
+              value="Add (Priced as Items)"
             />
           </div>
         </div>

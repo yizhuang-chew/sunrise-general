@@ -34,6 +34,30 @@ export default {
       }
       return addOns;
     },
+    bundleItems() {
+      var bundleItems = []
+      for(var attribute in this.masterVariant.attributes){
+        if(this.masterVariant.attributes[attribute].name=='SelectionItems'){
+          bundleItems = bundleItems.concat(this.masterVariant.attributes[attribute].value);
+        }
+      }
+      bundleItems.sort((a,b) => {
+        let aNum;
+        let bNum;
+        for(var aField in a){
+          if (a[aField].name=="ItemNumber"){
+            aNum = a[aField].value
+          }
+        }
+        for(var bField in b){
+          if (b[bField].name=="ItemNumber"){
+            bNum = b[bField].value
+          }
+        }
+        return (aNum > bNum) ? 1 : ((bNum > aNum) ? -1 : 0)
+      });
+      return bundleItems;
+    },
     appointmentDate(){
       var appointmentDate = false;
       for(var attribute in this.masterVariant.attributes){
@@ -42,15 +66,6 @@ export default {
         }
       }
       return appointmentDate;
-    },
-    subscription(){
-      var subscription = false;
-      for(var attribute in this.masterVariant.attributes){
-        if(this.masterVariant.attributes[attribute].name=='Subscription'){
-          subscription = this.masterVariant.attributes[attribute].value;
-        }
-      }
-      return subscription;
     },
   },
   components: {

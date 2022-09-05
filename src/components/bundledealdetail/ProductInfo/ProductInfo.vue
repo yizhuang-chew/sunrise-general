@@ -20,7 +20,8 @@
         <h3>
           <BasePrice :price="currentProduct.price" />
         </h3>
-        <h4 v-html="currentProduct.description" data-test="product-name">
+        <h4 data-test="product-name">
+          {{ currentProduct.description }}
         </h4>
         <VariantSelector :sku="sku" />
         <div v-if="availableQ">
@@ -32,7 +33,7 @@
           :availableQuantity="availableQuantity"
           :addOns="addOns"
           :appointmentDate="appointmentDate"
-          :subscription="subscription"
+          :bundleItems="bundleItems"
         />
         <a href @click.prevent="openAddToShoppingList">
           <i class="dl-icon-heart"></i><span>Shopping list</span>
