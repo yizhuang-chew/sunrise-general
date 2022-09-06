@@ -15,7 +15,10 @@ const translateLineItems = (response,locale)=>({
   //translate lineItems
   lineItems:(response.lineItems||[]).map(
     (item)=>({...item,name:item.name[locale]})
-  )
+  ),
+  customLineItems: (response.customLineItems||[]).map(
+    (item)=>({...item,name:item.name[locale]})
+  ),
 })
 export default (props,ctx) => {
   const auth = useStore(ctx,selectAuth)

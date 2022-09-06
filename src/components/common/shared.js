@@ -273,36 +273,6 @@ export const addLine = async (component) => {
 export const addCustomLine = async (component) => {
   var cartActions = [];
 
-  let itemCustomType = component.appointmentDateInput
-    ? {
-        custom: {
-          typeKey: "AppointmentItem",
-          fields: [
-            {
-              name: "AppointmentDate",
-              value: `"${component.appointmentDateInput}"`,
-            },
-          ],
-        },
-      }
-    : {};
-
-  if (Object.keys(itemCustomType).length === 0) {
-    itemCustomType = component.subscriptionInput
-      ? {
-          custom: {
-            typeKey: "SubscriptionItem",
-            fields: [
-              {
-                name: "SubscriptionDuration",
-                value: `"${component.subscriptionInput}"`,
-              },
-            ],
-          },
-        }
-      : {};
-  }
-
   if (!component.cartExists) {
     await component.createMyCart({
       currency: component.$store.state.currency,

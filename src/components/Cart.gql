@@ -37,6 +37,14 @@ fragment CartFields on Cart {
       }
     }
   }
+  customLineItems{
+    id
+    name(locale: $locale)
+    slug
+    money {
+      ...MoneyFields
+    }
+  }
   totalPrice {
     ...MoneyFields
   }
