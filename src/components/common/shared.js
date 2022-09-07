@@ -36,8 +36,14 @@ export function subTotal(cartLike) {
   const priceCentAmount = cartLike.lineItems.reduce(
     (acc, li) => acc + li.quantity * li.price.value.centAmount,
     0
+  ) + cartLike.customLineItems.reduce(
+    (acc, li) => acc + li.quantity * li.money.centAmount,
+    0
   );
   const totalPriceCentAmount = cartLike.lineItems.reduce(
+    (acc, li) => acc + li.totalPrice.centAmount,
+    0
+  )+ cartLike.customLineItems.reduce(
     (acc, li) => acc + li.totalPrice.centAmount,
     0
   );
