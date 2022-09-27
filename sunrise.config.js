@@ -1091,6 +1091,48 @@ export default {
         en: "Collection",
       },
     },
+    {
+      name:"ToTaste",
+        label: {
+          en: "To Taste",
+        },
+    },
+    {
+      name:"HowToEnjoy",
+        label: {
+          en: "How To Enjoy",
+        },
+    },
+    {
+      name:"Closure",
+        label: {
+          en: "Closure",
+        },
+    },
+    {
+      name:"BottleSize",
+        label: {
+          en: "Bottle Size",
+        },
+    },
+    {
+      name:"AlcVol",
+        label: {
+          en: "Alcohol Volume",
+        },
+    },
+    {
+      name:"ServingsPerPack",
+        label: {
+          en: "Servings Per Pack",
+        },
+    },
+    {
+      name:"ServingSize",
+        label: {
+          en: "Serving Size",
+        },
+    },
   ],
   variantSelector: [
     "GiftBox",
