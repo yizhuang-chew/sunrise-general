@@ -40,6 +40,8 @@ export default {
     en: "English",
     de: "Deutsch",
     hi: "Hindi",
+    zh: "Chinese",
+    ja: "Japanese",
   },
   countries: {
     AU: "Australia",
@@ -48,6 +50,8 @@ export default {
     SG: "Singapore",
     PH: "Phillippines",
     IN: "India",
+    CN: "China",
+    JP: "Japan",
   },
   logo:
     "https://images.ctfassets.net/l89vlt8ragrr/" +
@@ -93,7 +97,19 @@ export default {
           currency: "INR",
           currencyDisplay: "symbol",
         },
-      }
+      },
+      CN: {
+        currency: {
+          style: "currency",
+          currency: "CNY",
+        },
+      },
+      JP: {
+        currency: {
+          style: "currency",
+          currency: "JPY",
+        },
+      },
     },
     
     datetime: {
