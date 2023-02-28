@@ -297,6 +297,7 @@ export default {
           it: "Brand",
           zh: "品牌",
           en: "Brand",
+          ja: "ブランド"
         },
     },
     {
@@ -398,14 +399,6 @@ export default {
       },
     },
     {
-      name:"Ingredients",
-      label: {
-        it: "Ingredients",
-        zh: "成分",
-        en: "Ingredients",
-      },
-    },
-    {
       name:"Shade",
       label: {
         it: "Shade",
@@ -418,6 +411,7 @@ export default {
       label: {
         it: "How To",
         zh: "使用说明",
+        ja: "方法",
         en: "How To",
       },
     },
@@ -650,14 +644,6 @@ export default {
         de: "Alcohol %",
         en: "Alcohol %",
       },
-    },
-    {
-      name:"Ingredients",
-        label: {
-          it: "Ingredients",
-          de: "Ingredients",
-          en: "Ingredients",
-        },
     },
     {
       name:"Directions",
