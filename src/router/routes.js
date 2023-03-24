@@ -191,7 +191,7 @@ export default [
         },
       },
       {
-        path: "insuranceproduct/",
+        path: "insuranceproduct/:productSlug/:sku",
         name: "insuranceproduct",
         components: {
           default: PageInsuranceProductDetail,

@@ -34,8 +34,10 @@
               <option value="Model 4">Model 4</option>
               <option value="Model 5">Model 6</option>
             </select>
+
             <span>Address</span>
             <input v-model="carLocation" type="text" placeholder="Address" />
+
             <span class="field-label-text" data-test="form-label-text"
               >Where is the car Kept?</span
             >

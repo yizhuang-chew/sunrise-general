@@ -9,13 +9,6 @@
       <form v-if="isOnStock" ref="form" v-on:submit.prevent="addCustomLineItem">
         <div class="quality-cart-wrap">
           <div class="quality-wrap">
-            <!-- <a
-            href="#" 
-            @click.prevent="submitForm"
-            data-test="add-to-cart-button"
-          >
-            {{$t('addToCart')}}
-          </a> -->
             <input
               data-test="add-to-cart-button"
               type="submit"

@@ -1,23 +1,23 @@
-import Breadcrumb from '../../common/Breadcrumb/Breadcrumb.vue';
-import ProductInfo from '../ProductInfo/ProductInfo.vue';
-import AddToShoppingList from '../../productoverview/AddToShoppingList/AddToShoppingList.vue';
+import Breadcrumb from "../../common/Breadcrumb/Breadcrumb.vue";
+import ProductInfo from "../ProductInfo/ProductInfo.vue";
+import AddToShoppingList from "../../productoverview/AddToShoppingList/AddToShoppingList.vue";
 
 export default {
   props: {
     productSlug: {
       type: String,
-      default: "Custom",
+      default: "car-insurance",
     },
     sku: {
       type: String,
-      default: "Custom",
+      default: "car-insurance",
     },
   },
   data: () => ({
-    showAddToShoppingList:false,
+    showAddToShoppingList: false,
     productSku: null,
   }),
-  methods:{
+  methods: {
     openAddToShoppingList() {
       this.showAddToShoppingList = true;
     },
@@ -28,6 +28,6 @@ export default {
   components: {
     Breadcrumb,
     ProductInfo,
-    AddToShoppingList
+    AddToShoppingList,
   },
 };
