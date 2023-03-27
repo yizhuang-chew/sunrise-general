@@ -19,7 +19,7 @@
           <i class="dl-icon-close"></i>
         </a>
         <div class="cart-content">
-          <h3>{{ $t('miniCart') }}</h3>
+          <h3>{{ $t("miniCart") }}</h3>
           <span v-if="cartNotEmpty">
             <ul>
               <li
@@ -44,16 +44,17 @@
                   <h4>
                     <router-link
                       :to="
-                        productRoute(productSlug(lineItem), lineItem.variant.sku)
+                        productRoute(
+                          productSlug(lineItem),
+                          lineItem.variant.sku
+                        )
                       "
                       data-test="cart-line-item-link"
                     >
                       {{ nameFromLineItem(lineItem) }}
                     </router-link>
                   </h4>
-                  <span
-                    data-test="cart-line-item-quantity"
-                  >
+                  <span data-test="cart-line-item-quantity">
                     {{ lineItem.quantity }} ×
                     <BasePrice :price="totalPrice(lineItem)"
                   /></span>
@@ -66,41 +67,31 @@
                 data-test="mini-cart-line-item"
                 class="single-product-cart"
               >
-               <div class="cart-img">
-                  <router-link
-                    to="custom"
-                  >
+                <div class="cart-img">
+                  <router-link to="custom">
                     <img
-                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+                      src="https://live.staticflickr.com/65535/17309474945_5bd5f63af8_b.jpg"
                       :alt="customLineItem.name.en"
                     />
                   </router-link>
                 </div>
                 <div class="cart-title">
                   <h4>
-                    <router-link
-                      to="custom"
-                      data-test="cart-line-item-link"
-                    >
+                    <router-link to="custom" data-test="cart-line-item-link">
                       {{ customLineItem.name.en }}
                     </router-link>
                   </h4>
-                  <span
-                    data-test="cart-line-item-quantity"
-                  >
+                  <span data-test="cart-line-item-quantity">
                     {{ customLineItem.quantity }} ×
-                    <BasePrice :price="{value:customLineItem.totalPrice}"
+                    <BasePrice :price="{ value: customLineItem.totalPrice }"
                   /></span>
                 </div>
               </li>
             </ul>
             <div class="cart-total">
               <h4>
-                {{ $t('subtotal') }}:
-                <BasePrice
-                  :price="subtotal"
-                  data-test="mini-cart-price"
-                />
+                {{ $t("subtotal") }}:
+                <BasePrice :price="subtotal" data-test="mini-cart-price" />
               </h4>
             </div>
             <div class="cart-checkout-btn">
@@ -109,18 +100,18 @@
                 @click="close"
                 class="btn-grey"
               >
-                {{ $t('viewBag') }}
+                {{ $t("viewBag") }}
               </router-link>
               <router-link
                 :to="{ name: 'checkout' }"
                 data-test="checkout-button"
                 @click="close"
-                >{{ $t('checkout') }}</router-link
+                >{{ $t("checkout") }}</router-link
               >
             </div>
           </span>
           <span v-if="!cartNotEmpty">
-            <h5>{{ $t('emptyCart') }}</h5>
+            <h5>{{ $t("emptyCart") }}</h5>
           </span>
         </div>
       </div>

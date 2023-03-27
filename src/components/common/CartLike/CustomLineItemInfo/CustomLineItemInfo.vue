@@ -18,27 +18,21 @@
         />
       </td>
       <td class="product-img">
-        <router-link
-          to="custom"
-          class="img"
-        >
+        <router-link to="insurance" class="img">
           <img
-            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+            src="https://live.staticflickr.com/65535/17309474945_5bd5f63af8_b.jpg"
             :alt="lineItem.name.en"
           />
         </router-link>
       </td>
       <td class="product-name">
-        <router-link
-          to="custom"
-          data-test="cart-line-item-link"
-        >
-          {{ lineItem.name.en }}
+        <router-link to="insurance" data-test="cart-line-item-link">
+          Car Insurance
         </router-link>
       </td>
       <td v-if="!selectable" class="product-price">
         <span class="amount" data-test="item-price">
-          <BasePrice :price="{value: lineItem.taxedPrice.totalGross}" />
+          <BasePrice :price="{ value: lineItem.taxedPrice.totalGross }" />
         </span>
       </td>
       <td class="cart-quality">
@@ -62,7 +56,7 @@
       </td>
       <td v-if="!selectable" class="product-total" data-test="line-total">
         <span>
-          <BasePrice :price="{value: lineItem.totalPrice}" />
+          <BasePrice :price="{ value: lineItem.totalPrice }" />
         </span>
       </td>
     </tr>
