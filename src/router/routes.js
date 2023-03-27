@@ -29,6 +29,7 @@ import TabReturn from "../components/useraccount/TabReturn/TabReturn.vue";
 import TabChangePassword from "../components/useraccount/TabChangePassword/TabChangePassword.vue";
 import TabDashboard from "../components/useraccount/TabDashboard/TabDashboard.vue";
 import PageCheckout from "../components/checkout/PageCheckout/PageCheckout.vue";
+import PageInsuranceProductDetail from "../components/insuranceproductdetail/PageProductDetail/PageProductDetail.vue";
 import { pageFromRoute } from "../components/common/shared";
 import Root from "../components/root/root.vue";
 
@@ -37,12 +38,10 @@ const requiresCart = true;
 
 export default [
   {
-    path: `/:country(${
-      Object.keys(config.countries).join("|")
-    })?/:locale(${
-      Object.keys(config.languages).join("|")
-    })?`,
-    props:true,
+    path: `/:country(${Object.keys(config.countries).join(
+      "|"
+    )})?/:locale(${Object.keys(config.languages).join("|")})?`,
+    props: true,
     component: Root,
     children: [
       {
@@ -191,6 +190,21 @@ export default [
           footer: false,
         },
       },
+      {
+        path: "insuranceproduct/:productSlug/:sku",
+        name: "insuranceproduct",
+        components: {
+          default: PageInsuranceProductDetail,
+          header: TheHeader,
+          footer: TheFooter,
+        },
+        props: {
+          default: true,
+          header: false,
+          footer: false,
+        },
+      },
+
       {
         path: "giftcard/:productSlug/:sku",
         name: "giftcard",
